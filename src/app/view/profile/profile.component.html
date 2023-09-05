@@ -1,0 +1,327 @@
+<p>profile works!</p>
+<c-callout color="primary">
+  New to or unfamiliar with flexbox? Read this CSS Tricks flexbox guide for
+  background, terminology, guidelines, and code snippets.
+</c-callout>
+<c-callout color="secondary">
+  New to or unfamiliar with flexbox? Read this CSS Tricks flexbox guide for
+  background, terminology, guidelines, and code snippets.
+</c-callout>
+<c-callout color="success">
+  New to or unfamiliar with flexbox? Read this CSS Tricks flexbox guide for
+  background, terminology, guidelines, and code snippets.
+</c-callout>
+<c-callout color="danger">
+  New to or unfamiliar with flexbox? Read this CSS Tricks flexbox guide for
+  background, terminology, guidelines, and code snippets.
+</c-callout>
+<c-callout color="warning">
+  New to or unfamiliar with flexbox? Read this CSS Tricks flexbox guide for
+  background, terminology, guidelines, and code snippets.
+</c-callout>
+<c-callout color="info">
+  New to or unfamiliar with flexbox? Read this CSS Tricks flexbox guide for
+  background, terminology, guidelines, and code snippets.
+</c-callout>
+<c-callout color="light">
+  New to or unfamiliar with flexbox? Read this CSS Tricks flexbox guide for
+  background, terminology, guidelines, and code snippets.
+</c-callout>
+<c-callout color="dark">
+  New to or unfamiliar with flexbox? Read this CSS Tricks flexbox guide for
+  background, terminology, guidelines, and code snippets.
+</c-callout>
+
+<c-card class="text-center mb-4">
+  <c-card-header>Header</c-card-header>
+  <c-card-body>
+    <h5 cCardTitle>Card title</h5>
+    <p cCardText>
+      Some quick example text to build on the card title and make up the bulk of
+      the card's content.
+    </p>
+    <button cButton color="primary">Go somewhere</button>
+  </c-card-body>
+  <c-card-footer class="text-medium-emphasis"> 2 days ago </c-card-footer>
+</c-card>
+
+<div cListGroup>
+  <button cListGroupItem [active]="true">Cras justo odio</button>
+  <button cListGroupItem>Dapibus ac facilisis in</button>
+  <button cListGroupItem>Morbi leo risus</button>
+  <button cListGroupItem>Porta ac consectetur ac</button>
+  <button cListGroupItem disabled>Vestibulum at eros</button>
+</div>
+
+<div cListGroup>
+  <button cListGroupItem [active]="true">Cras justo odio</button>
+  <button cListGroupItem>Dapibus ac facilisis in</button>
+  <button cListGroupItem>Morbi leo risus</button>
+  <button cListGroupItem>Porta ac consectetur ac</button>
+  <button cListGroupItem disabled>Vestibulum at eros</button>
+</div>
+
+<button [cModalToggle]="scrollingLongContentModal.id" cButton>
+  Scrolling long content
+</button>
+
+<c-modal #scrollingLongContentModal id="scrollingLongContentModal">
+  <c-modal-header>
+    <h5 cModalTitle>Modal title</h5>
+    <button [cModalToggle]="scrollingLongContentModal.id" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <ng-container *ngTemplateOutlet="longContent"></ng-container>
+  </c-modal-body>
+  <c-modal-footer>
+    <button
+      [cModalToggle]="scrollingLongContentModal.id"
+      cButton
+      color="secondary"
+    >
+      Close
+    </button>
+    <button cButton color="primary">Save changes</button>
+  </c-modal-footer>
+</c-modal>
+
+<ng-template #longContent>
+  <p>
+    Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus
+    ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur
+    ac, vestibulum at eros.
+  </p>
+  <p>
+    Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus
+    sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+  </p>
+  <p>
+    Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
+    magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec
+    ullamcorper nulla non metus auctor fringilla.
+  </p>
+  <p>
+    Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus
+    ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur
+    ac, vestibulum at eros.
+  </p>
+  <p>
+    Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus
+    sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+  </p>
+  <p>
+    Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
+    magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec
+    ullamcorper nulla non metus auctor fringilla.
+  </p>
+  <p>
+    Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus
+    ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur
+    ac, vestibulum at eros.
+  </p>
+  <p>
+    Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus
+    sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+  </p>
+  <p>
+    Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
+    magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec
+    ullamcorper nulla non metus auctor fringilla.
+  </p>
+  <p>
+    Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus
+    ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur
+    ac, vestibulum at eros.
+  </p>
+  <p>
+    Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus
+    sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+  </p>
+  <p>
+    Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
+    magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec
+    ullamcorper nulla non metus auctor fringilla.
+  </p>
+  <p>
+    Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus
+    ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur
+    ac, vestibulum at eros.
+  </p>
+  <p>
+    Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus
+    sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+  </p>
+  <p>
+    Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
+    magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec
+    ullamcorper nulla non metus auctor fringilla.
+  </p>
+  <p>
+    Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus
+    ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur
+    ac, vestibulum at eros.
+  </p>
+  <p>
+    Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus
+    sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
+  </p>
+  <p>
+    Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus
+    magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec
+    ullamcorper nulla non metus auctor fringilla.
+  </p>
+</ng-template>
+
+<button cButton cOffcanvasToggle="OffcanvasTop" >Toggle top offcanvas</button>
+<button cButton cOffcanvasToggle="OffcanvasBottom" >Toggle bottom offcanvas</button>
+<button cButton cOffcanvasToggle="OffcanvasEnd" >Toggle end offcanvas</button>
+
+<c-offcanvas
+  placement="top"
+  id="OffcanvasTop"
+>
+  <c-offcanvas-header>
+    <h5 cOffcanvasTitle>Offcanvas Header</h5>
+    <button
+      cButtonClose
+      class="text-reset"
+      cOffcanvasToggle="OffcanvasTop"
+      aria-label="Close"
+    ></button>
+  </c-offcanvas-header>
+  <c-offcanvas-body>
+    <p>
+      Content for the offcanvas goes here. You can place just about any CoreUI component or custom elements here.
+    </p>
+  </c-offcanvas-body>
+</c-offcanvas>
+
+<c-offcanvas
+  placement="bottom"
+  id="OffcanvasBottom"
+>
+  <c-offcanvas-header>
+    <h5 cOffcanvasTitle>Offcanvas Header</h5>
+    <button
+      cButtonClose
+      class="text-reset"
+      cOffcanvasToggle="OffcanvasBottom"
+      aria-label="Close"
+    ></button>
+  </c-offcanvas-header>
+  <c-offcanvas-body>
+    <p>
+      Content for the offcanvas goes here. You can place just about any CoreUI component or custom elements here.
+    </p>
+  </c-offcanvas-body>
+</c-offcanvas>
+
+<c-offcanvas
+  placement="end"
+  id="OffcanvasEnd"
+>
+  <c-offcanvas-header>
+    <h5 cOffcanvasTitle>Offcanvas Header</h5>
+    <button
+      cButtonClose
+      class="text-reset"
+      cOffcanvasToggle="OffcanvasEnd"
+      aria-label="Close"
+    ></button>
+  </c-offcanvas-header>
+  <c-offcanvas-body>
+    <p>
+      Content for the offcanvas goes here. You can place just about any CoreUI component or custom elements here.
+    </p>
+  </c-offcanvas-body>
+</c-offcanvas>
+
+<table cTable>
+    <thead cTableColor="dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Class</th>
+      <th scope="col">Heading</th>
+      <th scope="col">Heading</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colSpan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <table cTable>
+    <thead cTableColor="dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Class</th>
+      <th scope="col">Heading</th>
+      <th scope="col">Heading</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colSpan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <table cTable>
+    <thead cTableColor="dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Class</th>
+      <th scope="col">Heading</th>
+      <th scope="col">Heading</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colSpan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+    </tbody>
+  </table>
