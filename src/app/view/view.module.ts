@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './profile/profile.component';
 import { ReportComponent } from './report/report.component';
@@ -6,7 +8,7 @@ import { WorkLoggerComponent } from './work-logger/work-logger.component';
 import { WorkShiftComponent } from './work-shift/work-shift.component';
 
 //coreui components
-import { CalloutModule, CardModule , ListGroupModule, ModalModule, OffcanvasModule, TableModule, UtilitiesModule, ButtonModule   } from '@coreui/angular';
+import { CalloutModule, CardModule , ListGroupModule, ModalModule, OffcanvasModule, TableModule, UtilitiesModule, ButtonModule,FormModule    } from '@coreui/angular';
 
 
 
@@ -19,6 +21,7 @@ import { CalloutModule, CardModule , ListGroupModule, ModalModule, OffcanvasModu
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     CalloutModule,
     CardModule,
     ListGroupModule,
@@ -26,7 +29,8 @@ import { CalloutModule, CardModule , ListGroupModule, ModalModule, OffcanvasModu
     OffcanvasModule,
     TableModule,
     UtilitiesModule,
-    ButtonModule 
+    ButtonModule,
+    FormModule  
   ],
   exports:[
     ProfileComponent,

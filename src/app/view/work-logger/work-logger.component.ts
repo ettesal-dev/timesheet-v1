@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HolidayService } from 'src/app/services/holiday.service';
 
 @Component({
@@ -12,9 +13,19 @@ export class WorkLoggerComponent {
     name: "new one",
     date: "2023-4-6"
   }
+  
   constructor(public holiday: HolidayService){
     this.getHolidays();
   }
+  
+  name = new FormControl('', [Validators.required, Validators.minLength(3)]);
+  date = new FormControl('',[Validators.required])
+  holidayForm = new FormGroup({
+    name: this.name,
+    date: this.date
+  });
+
+
   getHolidays() {
     this.holiday.getHolidays().subscribe((data) => {
       this.holidays = data;
@@ -22,9 +33,11 @@ export class WorkLoggerComponent {
     });
   }
   postHoliday(){
-    this.holiday.createHoliday(this.newHoliday)
+    this.holiday.createHoliday(this.holidayForm.value)
+    this.holidayForm.reset();
   }
   // deleteHoliday(){
   //   this.holiday.deleteHoliday
   // }
+  
 }

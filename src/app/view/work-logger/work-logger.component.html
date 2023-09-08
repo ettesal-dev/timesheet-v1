@@ -1,9 +1,39 @@
-<p>work-logger works!</p>
+<!-- Form Holiday -->
+<h2 class="pb-3">Add Holidays</h2>
+<form [formGroup]="holidayForm" (ngSubmit)="postHoliday()">
+  <label for="name" class="pb-2">Name:</label>
+  <input
+    type="text"
+    id="name"
+    formControlName="name"
+    aria-label="default input example"
+    cFormControl
+  />
+  <p *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
+    <span *ngIf="name.hasError('required')">Name is required</span>
+    <span *ngIf="name.hasError('minlength')"
+      >Name must be at least 3 characters long</span
+    >
+  </p>
 
-<table cTable caption="top">
-  <caption>
-    List of Holidays
-  </caption>
+  <label for="date" class="pb-2">Date:</label>
+  <input
+    type="date"
+    id="date"
+    formControlName="date"
+    aria-label="default input example"
+    cFormControl
+  />
+  <p *ngIf="date.invalid && (date.dirty || date.touched)" class="text-danger">
+    <span *ngIf="date.hasError('required')">Date is required</span>
+  </p>
+  <br />
+  <button type="submit" cButton color="dark" [disabled]="holidayForm.invalid">Add</button>
+</form>
+<hr />
+<!-- Table Holiday -->
+<h2 class="pb-3">Holidays List</h2>
+<table cTable>
   <thead cTableColor="dark">
     <tr>
       <th scope="col">#</th>
@@ -18,13 +48,13 @@
       <th scope="row">{{ i + 1 }}</th>
       <td>{{ day.name }}</td>
       <td>{{ day.date | date : "dd/MM/yyyy" }}</td>
-      <td><button>edit</button></td>
-      <td><button (click)="holiday.deleteHoliday(day.date)">del</button></td>
+      <td><button cButton color="dark">edit</button></td>
+      <td>
+        <button (click)="holiday.deleteHoliday(day.date)" cButton color="dark">
+          del
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>
-<button (click)="postHoliday()">post new</button>
-<hr />
-
-<!-- form must be implemented -->
 
