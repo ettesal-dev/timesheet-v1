@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './profile/profile.component';
@@ -30,7 +31,8 @@ import { CalloutModule, CardModule , ListGroupModule, ModalModule, OffcanvasModu
     TableModule,
     UtilitiesModule,
     ButtonModule,
-    FormModule  
+    FormModule,
+    FormsModule  
   ],
   exports:[
     ProfileComponent,

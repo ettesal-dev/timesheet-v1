@@ -49,7 +49,7 @@ export class HolidayService {
       return of(null);
     }
   }
-  //irst need toggle to form, then change them
+  //first need toggle to form, then change them
   //PUT Holiday
   updateHoliday(updatedHoliday: any): Observable<any> {
     const index = this.mockHolidays.findIndex(
