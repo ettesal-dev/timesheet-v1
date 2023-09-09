@@ -19,11 +19,20 @@ export class HolidayService {
     }));
   }
   //GET Holiday
-  getHolidays(): Observable<any[]> {
-    const event = new Date('2023-09-08');
-    console.log(event.toUTCString());
+  // getHolidays(): Observable<any[]> {
+  //   const event = new Date('2023-09-08');
+  //   console.log(event.toUTCString());
 
-    return of(this.mockHolidays);
+  //   return of(this.mockHolidays);
+  // }
+  getHolidays(start?: any, end?: any): Observable<any[]> {
+    // Filter the mockHolidays array to include only holidays within the specified date range
+    const filteredHolidays = this.mockHolidays.filter((holiday) => {
+      const holidayDate = new Date(holiday.date);
+      return (!start || holidayDate >= start) && (!end || holidayDate <= end);
+    });
+  
+    return of(filteredHolidays);
   }
   //POST Holiday
   createHoliday(newHoliday: any): Observable<any> {
@@ -49,15 +58,15 @@ export class HolidayService {
       return of(null);
     }
   }
-  //first need toggle to form, then change them
+
   //PUT Holiday
-  updateHoliday(updatedHoliday: any): Observable<any> {
-    const index = this.mockHolidays.findIndex(
-      (h) => h.date === updatedHoliday.date
-    );
+  updateHoliday(updatedHoliday: any, date: string): Observable<any> {
+    const index = this.mockHolidays.findIndex((h) => h.date === date);
 
     if (index !== -1) {
-      this.mockHolidays[index].name = updatedHoliday.name;
+      this.mockHolidays[index].name = updatedHoliday.updateName;
+      this.mockHolidays[index].date = updatedHoliday.updateDate;
+
       return of(this.mockHolidays[index]);
     } else {
       return of(null);

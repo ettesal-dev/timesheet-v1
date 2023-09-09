@@ -35,6 +35,17 @@
 <hr />
 <!-- Table Holiday -->
 <h2 class="pb-3">Holidays List</h2>
+<div class="d-flex flex-row">
+  <div class="d-flex flex-column">
+    <p>Start Date</p>
+    <input cFormControl placeholder="Default input" type="date" [(ngModel)]="startDate" (change)="getHolidays()"/>
+  </div>
+  <div class="d-flex flex-column">
+    <p>End Date</p>
+    <input cFormControl placeholder="Default input" type="date" [(ngModel)]="endDate" (change)="getHolidays()"/>
+  </div>
+</div>
+<br />
 <table cTable>
   <thead cTableColor="dark">
     <tr>
@@ -49,13 +60,19 @@
     <tr *ngFor="let day of holidays; let i = index">
       <th scope="row">{{ i + 1 }}</th>
       <td>
-        <ng-container *ngIf="!isEditingArray[i]; else editMode">{{ day.name }}</ng-container>
-        <ng-template #editMode><input type="text" [(ngModel)]="day.name" /></ng-template>
+        <!-- <ng-container *ngIf="!isEditingArray[i]; else editMode">{{ day.name }}</ng-container>
+        <ng-template #editMode><input type="text" [(ngModel)]="day.name" /></ng-template> -->
+        {{ day.name }}
       </td>
       <td>{{ day.date | date : "dd/MM/yyyy" }}</td>
       <td>
-        <button (click)="toogleEditing(i)" cButton color="dark">
-          {{ isEditingArray[i] ? "ok" : "edit" }}
+        <button
+          (click)="getDate(day.date)"
+          [cModalToggle]="verticallyCenteredModal.id"
+          cButton
+          color="dark"
+        >
+          edit
         </button>
       </td>
       <td>
@@ -66,3 +83,62 @@
     </tr>
   </tbody>
 </table>
+
+<!-- Form Modal -->
+
+<c-modal
+  #verticallyCenteredModal
+  alignment="center"
+  id="verticallyCenteredModal"
+>
+  <c-modal-header>
+    <h5 cModalTitle>Update Holiday</h5>
+    <button [cModalToggle]="verticallyCenteredModal.id" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    must implement here
+    <form [formGroup]="holidayUpdateForm" (ngSubmit)="putHoliday()">
+      <label for="name" class="pb-2">Name:</label>
+      <input type="text" id="name" formControlName="updateName" cFormControl />
+      <p
+        *ngIf="updateName.invalid && (updateName.dirty || updateName.touched)"
+        class="text-danger"
+      >
+        <span *ngIf="updateName.hasError('required')">Name is required</span>
+        <span *ngIf="updateName.hasError('minlength')"
+          >Name must be at least 3 characters long</span
+        >
+      </p>
+
+      <label for="date" class="pb-2">Date:</label>
+      <input type="date" id="date" formControlName="updateDate" cFormControl />
+      <p
+        *ngIf="updateDate.invalid && (updateDate.dirty || updateDate.touched)"
+        class="text-danger"
+      >
+        <span *ngIf="updateDate.hasError('required')">Date is required</span>
+      </p>
+      <br />
+      <c-modal-footer>
+        <button
+          [cModalToggle]="verticallyCenteredModal.id"
+          cButton
+          color="secondary"
+        >
+          Close
+        </button>
+        <button
+          type="submit"
+          cButton
+          color="dark"
+          [disabled]="holidayUpdateForm.invalid"
+        >
+          update
+        </button>
+      </c-modal-footer>
+      <!-- <button type="submit" cButton color="dark" [disabled]="holidayForm.invalid">
+        Add
+      </button> -->
+    </form>
+  </c-modal-body>
+</c-modal>

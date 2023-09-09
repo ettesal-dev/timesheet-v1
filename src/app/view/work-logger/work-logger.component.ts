@@ -8,30 +8,45 @@ import { HolidayService } from 'src/app/services/holiday.service';
   styleUrls: ['./work-logger.component.scss'],
 })
 export class WorkLoggerComponent {
-  isEditing: boolean = false
-  isEditingArray: boolean[] = [];
-  // isEditingArray: boolean[] = Array(this.getHolidays.length).fill(false);
   holidays: any[] = [];
+  dateHoliday: string = '';
+  startDate: string = "";
+  endDate: string = "";
 
   constructor(public holiday: HolidayService) {
     this.getHolidays();
   }
-  toogleEditing(index:number){
-    this.isEditingArray[index] = !this.isEditingArray[index]
-    console.log(this.isEditingArray[index])
+
+  getDate(date: string) {
+    this.dateHoliday = date;
+    console.log(this.dateHoliday);
   }
 
   name = new FormControl('', [Validators.required, Validators.minLength(3)]);
   date = new FormControl('', [Validators.required]);
+  updateName = new FormControl('', [
+    Validators.required,
+    Validators.minLength(3),
+  ]);
+  updateDate = new FormControl('', [Validators.required]);
   holidayForm = new FormGroup({
     name: this.name,
     date: this.date,
   });
+  holidayUpdateForm = new FormGroup({
+    updateName: this.updateName,
+    updateDate: this.updateDate,
+  });
 
   getHolidays() {
-    this.holiday.getHolidays().subscribe((data) => {
+    const startDate = new Date('2023-12-01');
+    const endDate = undefined
+
+    const start = this.startDate ? new Date(this.startDate) : null;
+    const end = this.endDate ? new Date(this.endDate) : null;
+    this.holiday.getHolidays(start, end).subscribe((data) => {
       this.holidays = data;
-      this.isEditingArray = Array(this.holidays.length).fill(false);
+
       console.log(this.holidays);
       console.log(data);
     });
@@ -39,9 +54,9 @@ export class WorkLoggerComponent {
   postHoliday() {
     this.holiday.createHoliday(this.holidayForm.value);
     this.holidayForm.reset();
-    //console.log(this.isEditingArray)
   }
-  putHoliday(){
-    
+  putHoliday() {
+    this.holiday.updateHoliday(this.holidayUpdateForm.value, this.dateHoliday);
   }
+  
 }
