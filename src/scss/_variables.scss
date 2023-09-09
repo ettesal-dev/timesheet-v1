@@ -1,6 +1,6 @@
 // Variable overrides
 // Variables
-//
+
 // Variables should follow the `$component-state-property-size` formula for
 // consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
 
@@ -244,7 +244,7 @@
 // );
 
 // Options
-//
+
 // Quickly modify global styling by enabling or disabling optional features.
 
 // $enable-caret:                true;
@@ -271,13 +271,13 @@
 // $variable-prefix:             cui-;
 
 // Gradient
-//
+
 // The gradient which is added to components if `$enable-gradients` is `true`
 // This gradient is also added to elements with `.bg-gradient`
 // $gradient: linear-gradient(180deg, rgba($white, .15), rgba($white, 0));
 
 // Spacing
-//
+
 // Control the default styling of most Bootstrap elements by modifying these
 // variables. Mostly focused on spacing.
 // You can add more entries to the $spacers map, should you need more variation.
@@ -295,7 +295,7 @@
 // $negative-spacers: if($enable-negative-margins, negativify-map($spacers), null);
 
 // Position
-//
+
 // Define the edge positioning anchors of the position utilities.
 
 // $position-values: (
@@ -306,7 +306,7 @@
 
 
 // Body
-//
+
 // Settings for the `<body>` element.
 
 // $body-bg:                   $white;
@@ -315,7 +315,7 @@
 
 
 // Links
-//
+
 // Style anchor elements.
 
 // $link-color:                              $primary;
@@ -328,14 +328,14 @@
 // $stretched-link-z-index:                  1;
 
 // Paragraphs
-//
+
 // Style p element.
 
 // $paragraph-margin-bottom:   1rem;
 
 
 // Grid breakpoints
-//
+
 // Define the minimum dimensions at which your layout will change,
 // adapting to different screen sizes, for use in media queries.
 
@@ -355,7 +355,7 @@
 
 
 // Grid containers
-//
+
 // Define the maximum width of `.container` for different screen sizes.
 
 // scss-docs-start container-max-widths
@@ -372,7 +372,7 @@
 
 
 // Grid columns
-//
+
 // Set the number of columns and specify the width of the gutters.
 
 // $grid-columns:                12;
@@ -387,7 +387,7 @@
 
 
 // Components
-//
+
 // Define common padding and border radius sizes and more.
 
 // $border-width:                1px;
@@ -435,7 +435,7 @@
 // stylelint-enable function-disallowed-list
 
 // Typography
-//
+
 // Font, line-height, and color for body text, headings, and more.
 
 // stylelint-disable value-keyword-case
@@ -552,7 +552,7 @@
 
 
 // Tables
-//
+
 // Customizes the `.table` component with basic values, each used across all table variations.
 
 // scss-docs-start table-variables
@@ -606,7 +606,7 @@
 
 
 // Buttons + Forms
-//
+
 // Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
 
 // scss-docs-start button-form-variables
@@ -633,7 +633,7 @@
 // scss-docs-end button-form-variables
 
 // Buttons
-//
+
 // For each of Bootstrap's buttons, define text, background, and border color.
 
 // scss-docs-start button-variables
@@ -920,7 +920,7 @@
 // scss-docs-end form-validation-states
 // scss-docs-end form-variables
 // Z-index master list
-//
+
 // Warning: Avoid customizing these values. They're used for a bird's eye view
 // of components dependent on the z-axis and are designed to all work together.
 
@@ -1001,7 +1001,7 @@
 // scss-docs-end navbar-variables
 
 // Dropdowns
-//
+
 // Dropdown menu container and contents.
 // scss-docs-start dropdown-variables
 // $dropdown-min-width:                10rem;
@@ -1289,7 +1289,7 @@
 // scss-docs-end avatar-variables
 
 // Alerts
-//
+
 // Define alert colors, border radius, and padding.
 // scss-docs-start alert-variables
 // $alert-padding-y:                   $spacer;
@@ -1664,3 +1664,4 @@
 // $kbd-bg:                            $gray-900;
 
 // $pre-color:                         unset;
+

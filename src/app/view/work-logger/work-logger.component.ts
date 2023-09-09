@@ -1,20 +1,35 @@
 import { Component } from '@angular/core';
+
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HolidayService } from 'src/app/services/holiday.service';
+
+
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
+import { listLocales } from 'ngx-bootstrap/chronos';
 
 @Component({
   selector: 'app-work-logger',
   templateUrl: './work-logger.component.html',
-  styleUrls: ['./work-logger.component.scss'],
+  styleUrls: ['./work-logger.component.scss']
+  
 })
 export class WorkLoggerComponent {
   holidays: any[] = [];
   dateHoliday: string = '';
-  startDate: string = "";
-  endDate: string = "";
+  startDate: string = '';
+  endDate: string = '';
 
-  constructor(public holiday: HolidayService) {
+  locale = 'en';
+  locales = listLocales();
+
+  constructor(public holiday: HolidayService, private localeService: BsLocaleService) {
     this.getHolidays();
+  }
+
+  applyLocale(pop: any) {
+    this.localeService.use(this.locale);
+    pop.hide();
+    pop.show();
   }
 
   getDate(date: string) {
@@ -40,7 +55,7 @@ export class WorkLoggerComponent {
 
   getHolidays() {
     const startDate = new Date('2023-12-01');
-    const endDate = undefined
+    const endDate = undefined;
 
     const start = this.startDate ? new Date(this.startDate) : null;
     const end = this.endDate ? new Date(this.endDate) : null;
@@ -58,5 +73,4 @@ export class WorkLoggerComponent {
   putHoliday() {
     this.holiday.updateHoliday(this.holidayUpdateForm.value, this.dateHoliday);
   }
-  
 }

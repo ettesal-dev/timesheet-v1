@@ -15,7 +15,7 @@ export const navItems: INavData[] = [
     
   },
   {
-    name: 'Work Logger',
+    name: 'پنل مدیریت',
     url: './worklogger',
     iconComponent: { name: 'cil-calendar' }
     
