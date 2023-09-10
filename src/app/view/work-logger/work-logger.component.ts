@@ -4,8 +4,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HolidayService } from 'src/app/services/holiday.service';
 
 
-import { BsLocaleService } from 'ngx-bootstrap/datepicker';
-import { listLocales } from 'ngx-bootstrap/chronos';
 
 @Component({
   selector: 'app-work-logger',
@@ -19,18 +17,13 @@ export class WorkLoggerComponent {
   startDate: string = '';
   endDate: string = '';
 
-  locale = 'en';
-  locales = listLocales();
 
-  constructor(public holiday: HolidayService, private localeService: BsLocaleService) {
+
+  constructor(public holiday: HolidayService) {
     this.getHolidays();
   }
 
-  applyLocale(pop: any) {
-    this.localeService.use(this.locale);
-    pop.hide();
-    pop.show();
-  }
+
 
   getDate(date: string) {
     this.dateHoliday = date;
@@ -68,9 +61,15 @@ export class WorkLoggerComponent {
   }
   postHoliday() {
     this.holiday.createHoliday(this.holidayForm.value);
+    this.getHolidays()
     this.holidayForm.reset();
   }
   putHoliday() {
     this.holiday.updateHoliday(this.holidayUpdateForm.value, this.dateHoliday);
+    this.getHolidays()
+  }
+  deleteHoliday(date:string){
+    this.holiday.deleteHoliday(date)
+    this.getHolidays()
   }
 }
