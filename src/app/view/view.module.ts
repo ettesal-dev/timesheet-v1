@@ -12,15 +12,6 @@ import { WorkShiftComponent } from './work-shift/work-shift.component';
 import { CalloutModule, CardModule , ListGroupModule, ModalModule, OffcanvasModule, TableModule, UtilitiesModule, ButtonModule,FormModule    } from '@coreui/angular';
 
 
-import { defineLocale } from 'ngx-bootstrap/chronos';
-import { deLocale } from 'ngx-bootstrap/locale';
-defineLocale('fa', deLocale);
-import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatNativeDateModule} from '@angular/material/core';
-
 
 
 
@@ -45,7 +36,7 @@ import {MatNativeDateModule} from '@angular/material/core';
     ButtonModule,
     FormModule,
     FormsModule,
-    BsDatepickerModule.forRoot()  
+     
   ],
   exports:[
     ProfileComponent,
