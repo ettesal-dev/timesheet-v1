@@ -64,6 +64,8 @@ export class WorkLoggerComponent {
     this.getHolidays()
     this.holidayForm.reset();
   }
+  //for use API Url, we should separate date and name from holidayUpdatedForm
+  //example: this.holidayUpdateForm.value.updateDate or this.holidayUpdateForm.value.updateName
   putHoliday() {
     this.holiday.updateHoliday(this.holidayUpdateForm.value, this.dateHoliday);
     this.getHolidays()
