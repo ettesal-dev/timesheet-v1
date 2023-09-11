@@ -1,3 +1,4 @@
+<!-- Holiday -->
 <!-- Form Holiday -->
 <h2 class="pb-3">ایجاد تعطیلات</h2>
 <form [formGroup]="holidayForm" (ngSubmit)="postHoliday()">
@@ -38,11 +39,23 @@
 <div class="d-flex flex-row">
   <div class="d-flex flex-column">
     <p>تاریخ شروع :</p>
-    <input cFormControl placeholder="Default input" type="date" [(ngModel)]="startDate" (change)="getHolidays()"/>
+    <input
+      cFormControl
+      placeholder="Default input"
+      type="date"
+      [(ngModel)]="startDate"
+      (change)="getHolidays()"
+    />
   </div>
   <div class="d-flex flex-column">
     <p>تاریخ پایان :</p>
-    <input cFormControl placeholder="Default input" type="date" [(ngModel)]="endDate" (change)="getHolidays()"/>
+    <input
+      cFormControl
+      placeholder="Default input"
+      type="date"
+      [(ngModel)]="endDate"
+      (change)="getHolidays()"
+    />
   </div>
 </div>
 
@@ -53,10 +66,6 @@
   <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
 </mat-form-field> -->
-
- 
-
-
 
 <br />
 <table cTable>
@@ -109,7 +118,6 @@
     <button [cModalToggle]="verticallyCenteredModal.id" cButtonClose></button>
   </c-modal-header>
   <c-modal-body>
-    
     <form [formGroup]="holidayUpdateForm" (ngSubmit)="putHoliday()">
       <label for="name" class="pb-2">نام :</label>
       <input type="text" id="name" formControlName="updateName" cFormControl />
@@ -155,3 +163,6 @@
     </form>
   </c-modal-body>
 </c-modal>
+
+
+<!-- Shift -->
