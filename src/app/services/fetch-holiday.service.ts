@@ -36,7 +36,7 @@ export class FetchHolidayService {
   //DELETE method
   deleteHoliday(date: string): Observable<any[]> {
     const url = `${this.HOLIDAYS_API_URL}?date=${date}`;
-    return this.http.get(url, { observe: 'response' }).pipe(
+    return this.http.delete(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
         // Check the HTTP status code
         if (response.status === 200) {
@@ -59,7 +59,7 @@ export class FetchHolidayService {
   //POST method
   createHoliday(newHoliday: any): Observable<any[]> {
     const url = this.HOLIDAYS_API_URL;
-    return this.http.get(url, { observe: 'response' }).pipe(
+    return this.http.post(url, newHoliday, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
         // Check the HTTP status code
         if (response.status === 200) {
