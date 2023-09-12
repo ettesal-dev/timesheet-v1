@@ -20,9 +20,9 @@ export class FetchLogService {
       map((response: HttpResponse<any>) => {
         if (response.status === 200) {
           return response.body;
-        } else if (response.status === 400) {
-          console.error('Bad Request Error:', response.statusText);
-          throw 'Bad Request: Invalid input.';
+        } else if (response.status === 422) {
+          console.error('Unprocessable Content Error:', response.statusText);
+          throw 'Unprocessable Content Error.';
         } else if (response.status === 404) {
           console.error('Not Found Error:', response.statusText);
           throw 'User not found or no logs available for this user.';
@@ -46,14 +46,14 @@ export class FetchLogService {
     const url = `${this.USER_API_URL}?user_id=${userId}&log_date=${logDate}`;
     return this.http.delete(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        if (response.status === 204) {
-          return;
-        } else if (response.status === 400) {
-          console.error('Bad Request Error:', response.statusText);
-          throw 'Bad Request: Invalid input.';
-        } else if (response.status === 404) {
-          console.error('Not Found Error:', response.statusText);
-          throw 'Log not found for this user and date.';
+        if (response.status === 200) {
+          return response.body;
+        } else if (response.status === 422) {
+          console.error('Unprocessable Content Error:', response.statusText);
+          throw 'Unprocessable Content Error.';
+        } else if (response.status === 405) {
+          console.error('Method Not Allowed Response Status:', response.statusText);
+          throw 'Method Not Allowed Response Status.';
         } else {
           console.error(
             'Error deleting user log. Status code:',
@@ -82,14 +82,14 @@ export class FetchLogService {
     const url = `${this.USER_API_URL}?user_id=${userId}&log_id=${logId}&date=${date}&time=${time}&comment=${commentValue}&is_approved=${isApproved}`;
     return this.http.put(url, null, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        if (response.status === 204) {
-          return;
-        } else if (response.status === 400) {
-          console.error('Bad Request Error:', response.statusText);
-          throw 'Bad Request: Invalid input.';
-        } else if (response.status === 404) {
-          console.error('Not Found Error:', response.statusText);
-          throw 'Log not found for this user and details.';
+        if (response.status === 200) {
+          return response.body;
+        } else if (response.status === 422) {
+          console.error('Unprocessable Content Error:', response.statusText);
+          throw 'Unprocessable Content Error.';
+        } else if (response.status === 405) {
+          console.error('Method Not Allowed Response Status:', response.statusText);
+          throw 'Method Not Allowed Response Status.';
         } else {
           console.error('Error updating log. Status code:', response.status);
           throw 'Failed to update log. Please try again later.';
@@ -110,11 +110,11 @@ export class FetchLogService {
     const url = `${this.ENTRANCE_API_URL}?user_id=${userId}`;
     return this.http.post(url, entranceLogData, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        if (response.status === 201) {
-          return;
-        } else if (response.status === 400) {
-          console.error('Bad Request Error:', response.statusText);
-          throw 'Bad Request: Invalid input.';
+        if (response.status === 200) {
+          return response.body;
+        } else if (response.status === 422) {
+          console.error('Unprocessable Content Error:', response.statusText);
+          throw 'Unprocessable Content Error.';
         } else if (response.status === 404) {
           console.error('Not Found Error:', response.statusText);
           throw 'User not found or unable to create an entrance log.';
@@ -140,11 +140,11 @@ export class FetchLogService {
     const url = `${this.EXIT_API_URL}?user_id=${userId}`;
     return this.http.post(url, null, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        if (response.status === 201) {
-          return;
-        } else if (response.status === 400) {
-          console.error('Bad Request Error:', response.statusText);
-          throw 'Bad Request: Invalid input.';
+        if (response.status === 200) {
+          return response.body;
+        } else if (response.status === 422) {
+          console.error('Unprocessable Content Error:', response.statusText);
+          throw 'Unprocessable Content Error.';
         } else if (response.status === 404) {
           console.error('Not Found Error:', response.statusText);
           throw 'User not found or unable to create an exit log.';

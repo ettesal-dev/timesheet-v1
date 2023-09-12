@@ -24,9 +24,9 @@ export class FetchCalculateService {
       map((response: HttpResponse<any>) => {
         if (response.status === 200) {
           return response.body;
-        } else if (response.status === 400) {
-          console.error('Bad Request Error:', response.statusText);
-          throw 'Bad Request: Invalid input.';
+        } else if (response.status === 422) {
+          console.error('Unprocessable Content Error:', response.statusText);
+          throw 'Unprocessable Content Error.';
         } else if (response.status === 404) {
           console.error('Not Found Error:', response.statusText);
           throw 'User not found or no daily data available for this user and date range.';
@@ -58,9 +58,9 @@ export class FetchCalculateService {
       map((response: HttpResponse<any>) => {
         if (response.status === 200) {
           return response.body;
-        } else if (response.status === 400) {
-          console.error('Bad Request Error:', response.statusText);
-          throw 'Bad Request: Invalid input.';
+        } else if (response.status === 422) {
+          console.error('Unprocessable Content Error:', response.statusText);
+          throw 'Unprocessable Content Error.';
         } else if (response.status === 404) {
           console.error('Not Found Error:', response.statusText);
           throw 'User not found or no overtime data available for this user and date range.';
@@ -92,9 +92,9 @@ export class FetchCalculateService {
       map((response: HttpResponse<any>) => {
         if (response.status === 200) {
           return response.body;
-        } else if (response.status === 400) {
-          console.error('Bad Request Error:', response.statusText);
-          throw 'Bad Request: Invalid input.';
+        } else if (response.status === 422) {
+          console.error('Unprocessable Content Error:', response.statusText);
+          throw 'Unprocessable Content Error.';
         } else if (response.status === 404) {
           console.error('Not Found Error:', response.statusText);
           throw 'User not found or no undertime data available for this user and date range.';

@@ -21,7 +21,7 @@ export class FetchShiftService {
         if (response.status === 200) {
           return response.body;
         } else if (response.status === 400) {
-          console.error('Bad Request Error:', response.statusText);
+          console.error('Not Found Error:', response.statusText);
           throw 'Bad Request: Invalid input.';
         } else {
           console.error('Error fetching shifts. Status code:', response.status);
@@ -40,14 +40,16 @@ export class FetchShiftService {
     const url = `${this.SHIFT_API_URL}?shift_id=${shiftId}`;
     return this.http.delete(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        if (response.status === 204) {
+        if (response.status === 200) {
+          return response.body;
+        } else if (response.status === 204) {
           return;
-        } else if (response.status === 400) {
-          console.error('Bad Request Error:', response.statusText);
-          throw 'Bad Request: Invalid input.';
-        } else if (response.status === 404) {
-          console.error('Not Found Error:', response.statusText);
-          throw 'Shift not found.';
+        } else if (response.status === 422) {
+          console.error('Unprocessable Content Error:', response.statusText);
+          throw 'Unprocessable Content Error';
+        } else if (response.status === 405) {
+          console.error('Method Not Allowed Response Status:', response.statusText);
+          throw 'Method Not Allowed Response Status.';
         } else {
           console.error('Error deleting shift. Status code:', response.status);
           throw 'Failed to delete shift. Please try again later.';
@@ -67,9 +69,9 @@ export class FetchShiftService {
       map((response: HttpResponse<any>) => {
         if (response.status === 200) {
           return response.body;
-        } else if (response.status === 400) {
-          console.error('Bad Request Error:', response.statusText);
-          throw 'Bad Request: Invalid input.';
+        } else if (response.status === 422) {
+          console.error('Unprocessable Content Error:', response.statusText);
+          throw 'Unprocessable Content Error.';
         } else if (response.status === 404) {
           console.error('Not Found Error:', response.statusText);
           throw 'User not found or no shifts available for this user.';
@@ -90,14 +92,11 @@ export class FetchShiftService {
     const url = `${this.USER_API_URL}?user_id=${userId}&shift_id=${shiftId}`;
     return this.http.delete(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        if (response.status === 204) {
-          return;
-        } else if (response.status === 400) {
-          console.error('Bad Request Error:', response.statusText);
-          throw 'Bad Request: Invalid input.';
-        } else if (response.status === 404) {
-          console.error('Not Found Error:', response.statusText);
-          throw 'User or shift not found.';
+        if (response.status === 200) {
+          return response.body;
+        } else if (response.status === 422) {
+          console.error('Unprocessable Content Error:', response.statusText);
+          throw 'Unprocessable Content Error.';
         } else {
           console.error('Error deleting shift. Status code:', response.status);
           throw 'Failed to delete shift. Please try again later.';
@@ -117,11 +116,11 @@ export class FetchShiftService {
     const url = `${this.USER_API_URL}?user_id=${userId}&shift_id=${shiftId}`;
     return this.http.post(url, null, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        if (response.status === 201) {
-          return;
-        } else if (response.status === 400) {
-          console.error('Bad Request Error:', response.statusText);
-          throw 'Bad Request: Invalid input.';
+        if (response.status === 200) {
+          return response.body;
+        } else if (response.status === 422) {
+          console.error('Unprocessable Content Error:', response.statusText);
+          throw 'Unprocessable Content Error.';
         } else if (response.status === 404) {
           console.error('Not Found Error:', response.statusText);
           throw 'User or shift not found.';
@@ -143,11 +142,11 @@ export class FetchShiftService {
       .post(this.TYPE1_API_URL, newShiftType1, { observe: 'response' })
       .pipe(
         map((response: HttpResponse<any>) => {
-          if (response.status === 201) {
-            return;
-          } else if (response.status === 400) {
-            console.error('Bad Request Error:', response.statusText);
-            throw 'Bad Request: Invalid input.';
+          if (response.status === 200) {
+            return response.body;
+          } else if (response.status === 422) {
+            console.error('Unprocessable Content Error:', response.statusText);
+            throw 'Unprocessable Content Error.';
           } else {
             console.error(
               'Error creating shift. Status code:',
@@ -175,14 +174,14 @@ export class FetchShiftService {
     const url = `${this.TYPE1_API_URL}?shift_id=${shiftId}&start=${start}&end=${end}&flex_time=${flexTime}&permit_time=${permitTime}&days=${days}`;
     return this.http.patch(url, null, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        if (response.status === 204) {
-          return;
-        } else if (response.status === 400) {
-          console.error('Bad Request Error:', response.statusText);
-          throw 'Bad Request: Invalid input.';
-        } else if (response.status === 404) {
-          console.error('Not Found Error:', response.statusText);
-          throw 'Shift not found.';
+        if (response.status === 200) {
+          return response.body;
+        } else if (response.status === 422) {
+          console.error('Unprocessable Content Error:', response.statusText);
+          throw 'Unprocessable Content Error.';
+        } else if (response.status === 405) {
+          console.error('Method Not Allowed Response Status:', response.statusText);
+          throw 'Method Not Allowed Response Status.';
         } else {
           console.error('Error updating shift. Status code:', response.status);
           throw 'Failed to update shift. Please try again later.';
@@ -201,11 +200,11 @@ export class FetchShiftService {
       .post(this.TYPE2_API_URL, newShiftType2, { observe: 'response' })
       .pipe(
         map((response: HttpResponse<any>) => {
-          if (response.status === 201) {
-            return;
-          } else if (response.status === 400) {
-            console.error('Bad Request Error:', response.statusText);
-            throw 'Bad Request: Invalid input.';
+          if (response.status === 200) {
+            return response.body;
+          } else if (response.status === 422) {
+            console.error('Unprocessable Content Error:', response.statusText);
+            throw 'Unprocessable Content Error.';
           } else {
             console.error(
               'Error creating shift. Status code:',
@@ -233,14 +232,14 @@ export class FetchShiftService {
     const url = `${this.TYPE2_API_URL}?shift_id=${shiftId}&start=${start}&end=${end}&flex_time=${flexTime}&permit_time=${permitTime}&date=${date}`;
     return this.http.patch(url, null, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        if (response.status === 204) {
-          return;
-        } else if (response.status === 400) {
-          console.error('Bad Request Error:', response.statusText);
-          throw 'Bad Request: Invalid input.';
-        } else if (response.status === 404) {
-          console.error('Not Found Error:', response.statusText);
-          throw 'Shift not found.';
+        if (response.status === 200) {
+          return response.body;
+        } else if (response.status === 422) {
+          console.error('Unprocessable Content Error:', response.statusText);
+          throw 'Unprocessable Content Error.';
+        } else if (response.status === 405) {
+          console.error('Method Not Allowed Response Status:', response.statusText);
+          throw 'Method Not Allowed Response Status.';
         } else {
           console.error('Error updating shift. Status code:', response.status);
           throw 'Failed to update shift. Please try again later.';
