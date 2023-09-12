@@ -7,10 +7,10 @@ import { catchError, map } from 'rxjs';
   providedIn: 'root'
 })
 export class FetchShiftService {
-  private SHIFT_API_URL = 'your_api_url'
-  private USER_API_URL = 'your_api_url'
-  private TYPE1_API_URL = 'your_api_url'
-  private TYPE2_API_URL = 'your_api_url'
+  private SHIFT_API_URL = 'https://editor.swagger.io/shifts'
+  private USER_API_URL = 'https://editor.swagger.io/users/shifts'
+  private TYPE1_API_URL = 'https://editor.swagger.io/shifts/type1'
+  private TYPE2_API_URL = 'https://editor.swagger.io/shifts/type2'
 
   constructor(private http: HttpClient) { }
 
