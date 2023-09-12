@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { faker } from '@faker-js/faker';
 
+//this service is just for validate logic and view and test them with fake data entery.
+//after complete fetch services, we dont need this and we can delete them.
+
 @Injectable({
   providedIn: 'root',
 })
