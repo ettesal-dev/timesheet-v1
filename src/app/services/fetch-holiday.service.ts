@@ -88,11 +88,12 @@ export class FetchHolidayService {
     // Create an HttpParams object to set query parameters
     let params = new HttpParams()
       .set('current_date', currentDate)
-      .set('new_date', newDate)
-      .set('new_name', newName);
+      .set('new_date', newDate || '')
+      .set('new_name', newName || '');
 
     // Make the PUT request with the specified parameters
     return this.http
+    //the should be and data object, but instead of object we have params?!
       .put(this.HOLIDAYS_API_URL, null, { params, observe: 'response' })
       .pipe(
         map((response: HttpResponse<any>) => {
@@ -113,4 +114,7 @@ export class FetchHolidayService {
         })
       );
   }
+
+  //PATCH method
+  //this is same as PUT method
 }
