@@ -15,7 +15,6 @@ export class FetchHolidayService {
     const url = `${this.HOLIDAYS_API_URL}?start=${startDate}&end=${endDate}`;
     return this.http.get(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        // Check the HTTP status code
         if (response.status === 200) {
           return response.body;
         } else {
@@ -38,7 +37,6 @@ export class FetchHolidayService {
     const url = `${this.HOLIDAYS_API_URL}?date=${date}`;
     return this.http.delete(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        // Check the HTTP status code
         if (response.status === 200) {
           return response.body;
         } else {
@@ -61,7 +59,6 @@ export class FetchHolidayService {
     const url = this.HOLIDAYS_API_URL;
     return this.http.post(url, newHoliday, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        // Check the HTTP status code
         if (response.status === 200) {
           return response.body;
         } else {
@@ -92,27 +89,28 @@ export class FetchHolidayService {
       .set('new_name', newName || '');
 
     // Make the PUT request with the specified parameters
-    return this.http
-    //the should be and data object, but instead of object we have params?!
-      .put(this.HOLIDAYS_API_URL, null, { params, observe: 'response' })
-      .pipe(
-        map((response: HttpResponse<any>) => {
-          // Check the HTTP status code
-          if (response.status === 200) {
-            return response.body;
-          } else {
-            const error = {
-              statusCode: response.status,
-              message: 'Failed to update holiday.',
-            };
-            throw error;
-          }
-        }),
-        catchError((error) => {
-          console.error('HTTP request error:', error);
-          return throwError(error);
-        })
-      );
+    return (
+      this.http
+        //the should be and data object, but instead of object we have params?!
+        .put(this.HOLIDAYS_API_URL, null, { params, observe: 'response' })
+        .pipe(
+          map((response: HttpResponse<any>) => {
+            if (response.status === 200) {
+              return response.body;
+            } else {
+              const error = {
+                statusCode: response.status,
+                message: 'Failed to update holiday.',
+              };
+              throw error;
+            }
+          }),
+          catchError((error) => {
+            console.error('HTTP request error:', error);
+            return throwError(error);
+          })
+        )
+    );
   }
 
   //PATCH method

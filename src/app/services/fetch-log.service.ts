@@ -4,35 +4,33 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FetchLogService {
   private USER_API_URL = 'https://editor.swagger.io/users/logs';
-  private ENTRANCE_API_URL = 'https://editor.swagger.io/users/logs/entrance'
-  private EXIT_API_URL = 'https://editor.swagger.io/users/logs/exit'
+  private ENTRANCE_API_URL = 'https://editor.swagger.io/users/logs/entrance';
+  private EXIT_API_URL = 'https://editor.swagger.io/users/logs/exit';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   //GET method
   getUserLogs(userId: number): Observable<any> {
     const url = `${this.USER_API_URL}?user_id=${userId}`;
     return this.http.get(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        // Check the HTTP status code
         if (response.status === 200) {
-          // Successful response, return data
           return response.body;
         } else if (response.status === 400) {
-          // Handle 400 Bad Request status code
           console.error('Bad Request Error:', response.statusText);
           throw 'Bad Request: Invalid input.';
         } else if (response.status === 404) {
-          // Handle 404 Not Found status code
           console.error('Not Found Error:', response.statusText);
           throw 'User not found or no logs available for this user.';
         } else {
-          // Handle other status codes as needed
-          console.error('Error fetching user logs. Status code:', response.status);
+          console.error(
+            'Error fetching user logs. Status code:',
+            response.status
+          );
           throw 'Failed to fetch user logs. Please try again later.';
         }
       }),
@@ -48,21 +46,19 @@ export class FetchLogService {
     const url = `${this.USER_API_URL}?user_id=${userId}&log_date=${logDate}`;
     return this.http.delete(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        // Check the HTTP status code
         if (response.status === 204) {
-          // Successful response, no content
           return;
         } else if (response.status === 400) {
-          // Handle 400 Bad Request status code
           console.error('Bad Request Error:', response.statusText);
           throw 'Bad Request: Invalid input.';
         } else if (response.status === 404) {
-          // Handle 404 Not Found status code
           console.error('Not Found Error:', response.statusText);
           throw 'Log not found for this user and date.';
         } else {
-          // Handle other status codes as needed
-          console.error('Error deleting user log. Status code:', response.status);
+          console.error(
+            'Error deleting user log. Status code:',
+            response.status
+          );
           throw 'Failed to delete user log. Please try again later.';
         }
       }),
@@ -86,20 +82,15 @@ export class FetchLogService {
     const url = `${this.USER_API_URL}?user_id=${userId}&log_id=${logId}&date=${date}&time=${time}&comment=${commentValue}&is_approved=${isApproved}`;
     return this.http.put(url, null, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        // Check the HTTP status code
         if (response.status === 204) {
-          // Successful response, no content
           return;
         } else if (response.status === 400) {
-          // Handle 400 Bad Request status code
           console.error('Bad Request Error:', response.statusText);
           throw 'Bad Request: Invalid input.';
         } else if (response.status === 404) {
-          // Handle 404 Not Found status code
           console.error('Not Found Error:', response.statusText);
           throw 'Log not found for this user and details.';
         } else {
-          // Handle other status codes as needed
           console.error('Error updating log. Status code:', response.status);
           throw 'Failed to update log. Please try again later.';
         }
@@ -119,27 +110,27 @@ export class FetchLogService {
     const url = `${this.ENTRANCE_API_URL}?user_id=${userId}`;
     return this.http.post(url, entranceLogData, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        // Check the HTTP status code
         if (response.status === 201) {
-          // Successful response, no content
           return;
         } else if (response.status === 400) {
-          // Handle 400 Bad Request status code
           console.error('Bad Request Error:', response.statusText);
           throw 'Bad Request: Invalid input.';
         } else if (response.status === 404) {
-          // Handle 404 Not Found status code
           console.error('Not Found Error:', response.statusText);
           throw 'User not found or unable to create an entrance log.';
         } else {
-          // Handle other status codes as needed
-          console.error('Error creating entrance log. Status code:', response.status);
+          console.error(
+            'Error creating entrance log. Status code:',
+            response.status
+          );
           throw 'Failed to create entrance log. Please try again later.';
         }
       }),
       catchError((error) => {
         console.error('HTTP request error:', error);
-        return throwError('Failed to create entrance log. Please try again later.');
+        return throwError(
+          'Failed to create entrance log. Please try again later.'
+        );
       })
     );
   }
@@ -149,21 +140,19 @@ export class FetchLogService {
     const url = `${this.EXIT_API_URL}?user_id=${userId}`;
     return this.http.post(url, null, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        // Check the HTTP status code
         if (response.status === 201) {
-          // Successful response, no content
           return;
         } else if (response.status === 400) {
-          // Handle 400 Bad Request status code
           console.error('Bad Request Error:', response.statusText);
           throw 'Bad Request: Invalid input.';
         } else if (response.status === 404) {
-          // Handle 404 Not Found status code
           console.error('Not Found Error:', response.statusText);
           throw 'User not found or unable to create an exit log.';
         } else {
-          // Handle other status codes as needed
-          console.error('Error creating exit log. Status code:', response.status);
+          console.error(
+            'Error creating exit log. Status code:',
+            response.status
+          );
           throw 'Failed to create exit log. Please try again later.';
         }
       }),
