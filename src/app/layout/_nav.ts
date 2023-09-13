@@ -3,26 +3,32 @@ import { INavData } from '@coreui/angular';
 export const navItems: INavData[] = [
   
   {
-    name: 'Profile',
-    url: './profile',
+    name: 'داشبورد',
+    url: './dashboard',
     iconComponent: { name: 'cil-speedometer' }
     
   },
   {
-    name: 'Report',
-    url: './report',
+    name: 'شیفت ها',
+    url: './shifts',
     iconComponent: { name: 'cil-list-rich' }
     
   },
   {
-    name: 'پنل مدیریت',
-    url: './worklogger',
+    name: 'گزارش ها',
+    url: './logs',
     iconComponent: { name: 'cil-calendar' }
     
   },
   {
-    name: 'Work Shift',
-    url: './workshift',
+    name: 'تعطیلات',
+    url: './holidays',
+    iconComponent: { name: 'cil-clock' }
+    
+  },
+  {
+    name: 'رویداد ها',
+    url: './events',
     iconComponent: { name: 'cil-clock' }
     
   },

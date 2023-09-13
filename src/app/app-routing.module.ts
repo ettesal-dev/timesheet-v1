@@ -7,6 +7,11 @@ import { ProfileComponent } from './view/profile/profile.component';
 import { ReportComponent } from './view/report/report.component';
 import { WorkLoggerComponent } from './view/work-logger/work-logger.component';
 import { WorkShiftComponent } from './view/work-shift/work-shift.component';
+import { DashboardComponent } from './view/dashboard/dashboard.component';
+import { ShiftsComponent } from './view/shifts/shifts.component';
+import { LogsComponent } from './view/logs/logs.component';
+import { HolidaysComponent } from './view/holidays/holidays.component';
+import { EventsComponent } from './view/events/events.component';
 
 const routes: Routes = [
   {
@@ -27,23 +32,27 @@ const routes: Routes = [
       {
         path:'',
         pathMatch:'full',
-        redirectTo:'profile'
+        redirectTo:'dashboard'
       },
       {
-        path:'profile',
-        component: ProfileComponent
+        path:'dashboard',
+        component: DashboardComponent
       },
       {
-        path:'report',
-        component: ReportComponent
+        path:'shifts',
+        component: ShiftsComponent
       },
       {
-        path:'worklogger',
-        component: WorkLoggerComponent
+        path:'logs',
+        component: LogsComponent
       },
       {
-        path:'workshift',
-        component: WorkShiftComponent
+        path:'holidays',
+        component: HolidaysComponent
+      },
+      {
+        path:'events',
+        component: EventsComponent
       }
     ]
   },
