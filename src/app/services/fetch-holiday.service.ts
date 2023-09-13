@@ -33,7 +33,7 @@ export class FetchHolidayService {
   }
 
   //DELETE method
-  deleteHoliday(date: string): Observable<any[]> {
+  deleteHoliday(date: string[]): Observable<any[]> {
     const url = `${this.HOLIDAYS_API_URL}?date=${date}`;
     return this.http.delete(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {

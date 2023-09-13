@@ -42,8 +42,8 @@ export class FetchLogService {
   }
 
   //DELETE method
-  deleteUserLog(userId: number, logDate: number): Observable<any> {
-    const url = `${this.USER_API_URL}?user_id=${userId}&log_date=${logDate}`;
+  deleteUserLog(userId: number, logID: number): Observable<any> {
+    const url = `${this.USER_API_URL}?user_id=${userId}&log_date=${logID}`;
     return this.http.delete(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
         if (response.status === 200) {

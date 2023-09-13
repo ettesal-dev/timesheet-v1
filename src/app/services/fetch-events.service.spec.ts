@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FetchShiftService } from './fetch-shift.service';
+import { FetchEventsService } from './fetch-events.service';
 
-describe('FetchShiftService', () => {
-  let service: FetchShiftService;
+describe('FetchEventsService', () => {
+  let service: FetchEventsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(FetchShiftService);
+    service = TestBed.inject(FetchEventsService);
   });
 
   it('should be created', () => {
