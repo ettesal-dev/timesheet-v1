@@ -1,3 +1,4 @@
+<!-- add event form -->
 <h3 class="pb-3">ایجاد رویداد</h3>
 <form [formGroup]="eventForm" (ngSubmit)="postEvent()">
   <!-- creator name -->
@@ -19,7 +20,7 @@
     >
   </p>
   <!-- event name -->
-  <label for="eventName" class="pb-2">نام برگزار کننده :</label>
+  <label for="eventName" class="pb-2">نام رویداد :</label>
   <input
     type="text"
     id="eventName"
@@ -83,18 +84,31 @@
   </p>
   <!-- attendees -->
   <ng-container formArrayName="attendees">
-    <ng-container *ngFor="let attendees of attendees.controls; let index = index">
-        <div [formGroupName]="index">
-            <input id="name" type="text" formControlName="attendeesName" aria-label="default input example" cFormControl/>
-            <button (click)="deleteAttendees(index)">del</button>                
-        </div>
+    <label for="name" class="pb-2">شرکت کنندگان :</label>
+    <button type="button" cButton color="dark" (click)="addAttendees()">
+      اضافه
+    </button>
+    <ng-container
+      *ngFor="let attendees of attendees.controls; let index = index"
+    >
+      <div [formGroupName]="index">
+        <label for="name" class="pb-2">نام شرکت کننده :</label>
+        <select
+          formControlName="attendeesName"
+          id="name"
+          aria-label="Default select example"
+          cSelect
+        >
+          <option *ngFor="let user of users" [value]="user">{{ user }}</option>
+        </select>
+        <button (click)="deleteAttendees(index)" cButton color="dark">
+          حذف
+        </button>
+      </div>
     </ng-container>
-</ng-container>
-  
+  </ng-container>
+  <br />
 
-  <button type="button" cButton color="dark" (click)="addToName()">
-    اضافه
-  </button>
   <br />
   <button type="submit" cButton color="dark" [disabled]="eventForm.invalid">
     ایجاد
@@ -104,45 +118,146 @@
 <!-- for admin -->
 <h3 class="pb-3">لیست رویداد ها</h3>
 <table cTable>
-    <thead cTableColor="dark">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">نام رویداد</th>
-          <th scope="col">برگزار کننده</th>
-          <th scope="col">تاریخ</th>
-          <th scope="col">شروع</th>
-          <th scope="col">پایان</th>
-          <th scope="col">شرکت کنندگان</th>
-          <th scope="col">تغییر</th>
-          <th scope="col">حذف</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let event of events; let i = index">
-            <th scope="row">{{ i + 1 }}</th>
-            <!-- other td -->
-        </tr>
-      </tbody>
+  <thead cTableColor="dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">نام رویداد</th>
+      <th scope="col">برگزار کننده</th>
+      <th scope="col">تاریخ</th>
+      <th scope="col">شروع</th>
+      <th scope="col">پایان</th>
+      <th scope="col">شرکت کنندگان</th>
+      <th scope="col">تغییر</th>
+      <th scope="col">حذف</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let event of events; let i = index">
+      <th scope="row">{{ i + 1 }}</th>
+      <!-- other td -->
+      <td>{{ event.creatorName }}</td>
+      <td>{{ event.eventName }}</td>
+      <td>{{ event.eventDate | date : "dd/MM/yyyy" }}</td>
+      <td>{{ event.startTime }}</td>
+      <td>{{ event.endTime }}</td>
+      <td>
+        <ng-container *ngFor="let att of event.attendees"
+          ><p>{{ att }}</p></ng-container
+        >
+      </td>
+      <td>
+        <button
+          [cModalToggle]="verticallyCenteredModal.id"
+          cButton
+          color="dark"
+          (click)="
+            updateEvent(
+              event.id,
+              event.eventDate,
+              event.startTime,
+              event.endTime
+            )
+          "
+        >
+          تغییر
+        </button>
+      </td>
+      <td>
+        <button cButton color="dark" (click)="deleteEvent(event.id)">
+          حذف
+        </button>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 <!-- for user -->
 <h3 class="pb-3">لیست رویداد ها</h3>
 <table cTable>
-    <thead cTableColor="dark">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">نام رویداد</th>
-          <th scope="col">برگزار کننده</th>
-          <th scope="col">تاریخ</th>
-          <th scope="col">شروع</th>
-          <th scope="col">پایان</th>
-          <th scope="col">شرکت کنندگان</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let event of events; let i = index">
-            <th scope="row">{{ i + 1 }}</th>
-            <!-- other td -->
-        </tr>
-      </tbody>
+  <thead cTableColor="dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">نام رویداد</th>
+      <th scope="col">برگزار کننده</th>
+      <th scope="col">تاریخ</th>
+      <th scope="col">شروع</th>
+      <th scope="col">پایان</th>
+      <th scope="col">شرکت کنندگان</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let event of events; let i = index">
+      <th scope="row">{{ i + 1 }}</th>
+      <!-- other td -->
+    </tr>
+  </tbody>
 </table>
+
+<!-- update event form -->
+<c-modal
+  #verticallyCenteredModal
+  alignment="center"
+  id="verticallyCenteredModal"
+>
+  <c-modal-header>
+    <h5 cModalTitle>بروزرسانی رویداد ها</h5>
+    <button [cModalToggle]="verticallyCenteredModal.id" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <p>تاریخ رویداد:</p>
+    <p>{{ updateParameters.eventDate | date : "dd/MM/yyyy" }}</p>
+    <form [formGroup]="updatedEventForm" (ngSubmit)="putEvent()">
+      <ng-container formArrayName="updatedAttendees">
+        <label for="name" class="pb-2">شرکت کنندگان :</label>
+        <button
+          type="button"
+          (click)="addUpdatedAttendees()"
+          cButton
+          color="dark"
+        >
+          اضافه
+        </button>
+        <ng-container
+          *ngFor="let add of updatedAttendees.controls; let index = index"
+        >
+          <div [formGroupName]="index">
+            <select
+              formControlName="name"
+              id="name"
+              aria-label="Default select example"
+              cSelect
+            >
+              <option *ngFor="let user of users" [value]="user">
+                {{ user }}
+              </option>
+            </select>
+            <button
+              (click)="deleteUpdatedAttendees(index)"
+              cButton
+              color="dark"
+            >
+              del
+            </button>
+          </div>
+        </ng-container>
+      </ng-container>
+      <c-modal-footer>
+        <button
+          [cModalToggle]="verticallyCenteredModal.id"
+          cButton
+          color="secondary"
+        >
+          بستن
+        </button>
+        <button
+          type="submit"
+          cButton
+          color="dark"
+          [disabled]="updatedEventForm.invalid"
+        >
+          اعمال
+        </button>
+      </c-modal-footer>
+    </form>
+  </c-modal-body>
+</c-modal>
