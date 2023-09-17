@@ -1,1 +1,148 @@
-<p>events works!</p>
+<h3 class="pb-3">ایجاد رویداد</h3>
+<form [formGroup]="eventForm" (ngSubmit)="postEvent()">
+  <!-- creator name -->
+  <label for="creatorName" class="pb-2">نام برگزار کننده :</label>
+  <input
+    type="text"
+    id="creatorName"
+    formControlName="creatorName"
+    aria-label="default input example"
+    cFormControl
+  />
+  <p
+    *ngIf="creatorName.invalid && (creatorName.dirty || creatorName.touched)"
+    class="text-danger"
+  >
+    <span *ngIf="creatorName.hasError('required')">Name is required</span>
+    <span *ngIf="creatorName.hasError('minlength')"
+      >Name must be at least 3 characters long</span
+    >
+  </p>
+  <!-- event name -->
+  <label for="eventName" class="pb-2">نام برگزار کننده :</label>
+  <input
+    type="text"
+    id="eventName"
+    formControlName="eventName"
+    aria-label="default input example"
+    cFormControl
+  />
+  <p
+    *ngIf="eventName.invalid && (eventName.dirty || eventName.touched)"
+    class="text-danger"
+  >
+    <span *ngIf="eventName.hasError('required')">Name is required</span>
+    <span *ngIf="eventName.hasError('minlength')"
+      >Name must be at least 3 characters long</span
+    >
+  </p>
+  <!-- event date -->
+  <label for="eventDate" class="pb-2">تاریخ رویداد :</label>
+  <input
+    type="date"
+    id="eventDate"
+    formControlName="eventDate"
+    aria-label="default input example"
+    cFormControl
+  />
+  <p
+    *ngIf="eventDate.invalid && (eventDate.dirty || eventDate.touched)"
+    class="text-danger"
+  >
+    <span *ngIf="eventDate.hasError('required')">date is required</span>
+  </p>
+  <!-- start time -->
+  <label for="startTime" class="pb-2">زمان شروع :</label>
+  <input
+    type="time"
+    id="startTime"
+    formControlName="startTime"
+    aria-label="default input example"
+    cFormControl
+  />
+  <p
+    *ngIf="startTime.invalid && (startTime.dirty || startTime.touched)"
+    class="text-danger"
+  >
+    <span *ngIf="startTime.hasError('required')">time is required</span>
+  </p>
+  <!-- end time -->
+  <label for="endTime" class="pb-2">زمان پایان :</label>
+  <input
+    type="time"
+    id="endTime"
+    formControlName="endTime"
+    aria-label="default input example"
+    cFormControl
+  />
+  <p
+    *ngIf="endTime.invalid && (endTime.dirty || endTime.touched)"
+    class="text-danger"
+  >
+    <span *ngIf="endTime.hasError('required')">time is required</span>
+  </p>
+  <!-- attendees -->
+  <ng-container formArrayName="attendees">
+    <ng-container *ngFor="let attendees of attendees.controls; let index = index">
+        <div [formGroupName]="index">
+            <input id="name" type="text" formControlName="attendeesName" aria-label="default input example" cFormControl/>
+            <button (click)="deleteAttendees(index)">del</button>                
+        </div>
+    </ng-container>
+</ng-container>
+  
+
+  <button type="button" cButton color="dark" (click)="addToName()">
+    اضافه
+  </button>
+  <br />
+  <button type="submit" cButton color="dark" [disabled]="eventForm.invalid">
+    ایجاد
+  </button>
+</form>
+
+<!-- for admin -->
+<h3 class="pb-3">لیست رویداد ها</h3>
+<table cTable>
+    <thead cTableColor="dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">نام رویداد</th>
+          <th scope="col">برگزار کننده</th>
+          <th scope="col">تاریخ</th>
+          <th scope="col">شروع</th>
+          <th scope="col">پایان</th>
+          <th scope="col">شرکت کنندگان</th>
+          <th scope="col">تغییر</th>
+          <th scope="col">حذف</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let event of events; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <!-- other td -->
+        </tr>
+      </tbody>
+</table>
+
+<!-- for user -->
+<h3 class="pb-3">لیست رویداد ها</h3>
+<table cTable>
+    <thead cTableColor="dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">نام رویداد</th>
+          <th scope="col">برگزار کننده</th>
+          <th scope="col">تاریخ</th>
+          <th scope="col">شروع</th>
+          <th scope="col">پایان</th>
+          <th scope="col">شرکت کنندگان</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let event of events; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <!-- other td -->
+        </tr>
+      </tbody>
+</table>
