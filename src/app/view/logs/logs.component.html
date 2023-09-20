@@ -1,1 +1,29 @@
-<p>logs works!</p>
+<h3 class="pb-3">لیست گزارش ها</h3>
+<table cTable>
+    <thead cTableColor="dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">نام کارمند</th>
+          <th scope="col">تاریخ</th>
+          <th scope="col">زمان ورود</th>
+          <th scope="col">زمان خروج</th>
+          <th scope="col">یادداشت</th>
+          <th scope="col">وضعیت تایید</th>
+          <th scope="col">تغییر</th>
+          <th scope="col">حذف</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let log of logs; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{log.user}}</td>
+            <td>{{log.log_date | date : "dd/MM/yyyy"}}</td>
+            <td>{{log.time_entrance}}</td>
+            <td>{{log.time_exit}}</td>
+            <td>{{log.comment}}</td>
+            <td>{{log.is_approved}}</td>
+            <td><button cButton color="dark">تغییر</button></td>
+            <td><button cButton color="dark">حذف</button></td>
+        </tr>
+    </tbody>
+</table>
