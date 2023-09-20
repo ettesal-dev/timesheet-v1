@@ -3,7 +3,7 @@ import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { AlertModule } from '@coreui/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { JwtModule } from '@auth0/angular-jwt';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -91,7 +91,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     UtilitiesModule,
     TableModule,
     UtilitiesModule,
-    CalloutModule  
+    CalloutModule,
+    JwtModule.forRoot({})  
   ],
   providers: [
     // {

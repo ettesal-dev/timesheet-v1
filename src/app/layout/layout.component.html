@@ -5,27 +5,30 @@
   id="sidebar"
   visible
 >
-  <c-sidebar-brand>Admin Dashboard</c-sidebar-brand>
-  <!-- <c-sidebar-brand
-    [brandFull]="{
-      src: 'assets/img/brand/coreui-angular.svg',
-      width: 200,
-      height: 46,
-      alt: 'CoreUI Logo'
-    }"
+  <c-sidebar-brand
     [brandNarrow]="{
-      src: 'assets/img/brand/coreui-signet-white.svg',
+      src: 'assets/img/logo.png',
       width: 46,
       height: 46,
       alt: 'CoreUI Logo'
     }"
-    routerLink="./"
-  /> -->
+    [brandFull]="{
+      src: 'assets/img/brand.png',
+
+      height: 46,
+      alt: 'CoreUI Logo'
+    }"
+    >Admin Dashboard</c-sidebar-brand
+  >
 
   <ng-scrollbar pointerEventsMethod="scrollbar">
     <c-sidebar-nav [navItems]="navItems" dropdownMode="close" />
   </ng-scrollbar>
-  <c-sidebar-footer><button type="button" class="btn btn-dark" (click)="logOut()">Log Out</button></c-sidebar-footer>
+  <c-sidebar-footer
+    ><button type="button" class="btn btn-dark" (click)="logOut()">
+      Log Out
+    </button></c-sidebar-footer
+  >
   <c-sidebar-toggler
     *ngIf="!sidebar.narrow"
     toggle="unfoldable"
