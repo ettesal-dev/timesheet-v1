@@ -282,7 +282,7 @@
 // variables. Mostly focused on spacing.
 // You can add more entries to the $spacers map, should you need more variation.
 
-// $spacer: 1rem;
+ $spacer: 1rem;
 // $spacers: (
 //   0: 0,
 //   1: $spacer / 4,
@@ -1398,8 +1398,8 @@
 // Header
 // scss-docs-start header-variables
 // $header-min-height:             4rem;
-// $header-padding-y:              $spacer / 2;
-// $header-padding-x:              $spacer / 2;
+ $header-padding-y:              0;
+ $header-padding-x:              0;
 // $header-brand-font-size:        $font-size-lg;
 // $header-color:                  $medium-emphasis-dark;
 // $header-bg:                     $white;
