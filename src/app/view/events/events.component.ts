@@ -69,10 +69,6 @@ export class EventsComponent {
     updatedAttendees: this.fb.array([],Validators.required),
   });
 
-  // get updatedAttendees() {
-  //   return this.updatedEventForm.controls['updatedAttendees'] as FormArray;
-  // }
-
   get attendees() {
     return this.eventForm.controls['attendees'] as FormArray;
   }
