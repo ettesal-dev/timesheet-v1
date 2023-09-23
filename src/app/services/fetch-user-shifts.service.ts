@@ -12,8 +12,8 @@ export class FetchUserShiftsService {
   constructor(private http: HttpClient) {}
 
   //GET
-  getUserShifts(userId: number): Observable<any> {
-    const url = `${this.USERSHIFT_API_URL}?user_id=${userId}`;
+  getUserShifts(userId: number, startDate:string, endDate:string): Observable<any> {
+    const url = `${this.USERSHIFT_API_URL}?user_id=${userId}&start=${startDate}&end=${endDate}`;
     return this.http.get(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
         if (response.status === 200) {
@@ -69,12 +69,12 @@ export class FetchUserShiftsService {
   }
 
   //POST
-  createUserShift(userId: string, shiftId: string): Observable<any> {
-    const url = `${this.USERSHIFT_API_URL}?user_id=${userId}&shift_id=${shiftId}`;
+  createUserShift(userId: string, shiftId: string, activation:string, expiration:string): Observable<any> {
+    const url = `${this.USERSHIFT_API_URL}?user_id=${userId}&shift_id=${shiftId}&activation=${activation}&expiration=${expiration}`;
     return this.http.post(url, null, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        if (response.status === 200) {
-          return response.body;
+        if (response.status === 201) {
+          return;
         } else if (response.status === 404) {
           console.error('Not Found', response.statusText);
           throw 'Not Found.';
@@ -94,6 +94,39 @@ export class FetchUserShiftsService {
         return throwError(
           'Failed to create user shift. Please try again later.'
         );
+      })
+    );
+  }
+
+  //PATCH
+  updateShift(
+    userId: string,
+    shiftId: string,
+    isExpired: boolean,
+    activation: string,
+    expiration: string
+  ): Observable<any> {
+    const url = `${this.USERSHIFT_API_URL}?user_id=${userId}&shift_id=${shiftId}&is_expired=${isExpired}&activation=${activation}&expiration=${expiration}`;
+    return this.http.patch(url, null, { observe: 'response' }).pipe(
+      map((response: HttpResponse<any>) => {
+        // Check the HTTP status code
+        if (response.status === 200) {
+          // Successful response, no content
+          return;
+        } else if (response.status === 422) {
+          // Handle 422 Unprocessable Entity status code
+          console.error('Unprocessable Entity Error:', response.statusText);
+          throw 'Invalid data for updating user shift.';
+        } else {
+          // Handle other status codes as needed
+          console.error('Error updating user shift. Status code:', response.status);
+          throw 'Failed to update user shift. Please try again later.';
+        }
+      }),
+      catchError((error) => {
+        // Handle HTTP request errors
+        console.error('HTTP request error:', error);
+        return throwError('Failed to update user shift. Please try again later.');
       })
     );
   }

@@ -11,12 +11,22 @@ export class FetchHolidayService {
   constructor(private http: HttpClient) {}
 
   //GET method
-  getHolidays(startDate: string, endDate: string): Observable<any[]> {
-    const url = `${this.HOLIDAYS_API_URL}?start=${startDate}&end=${endDate}`;
+  getHolidays(
+    startDate: string,
+    endDate: string,
+    specificDate: string
+  ): Observable<any[]> {
+    const url = `${this.HOLIDAYS_API_URL}?start=${startDate}&end=${endDate}&specific_date=${specificDate}`;
     return this.http.get(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
         if (response.status === 200) {
           return response.body;
+        } else if (response.status === 404) {
+          console.error('Not Found Error:', response.statusText);
+          throw 'Events not found.';
+        } else if (response.status === 422) {
+          console.error('Unprocessable Content:', response.statusText);
+          throw 'Unprocessable Content.';
         } else {
           const error = {
             statusCode: response.status,
@@ -33,12 +43,12 @@ export class FetchHolidayService {
   }
 
   //DELETE method
-  deleteHoliday(date: string[]): Observable<any[]> {
+  deleteHoliday(date: string[]): Observable<any> {
     const url = `${this.HOLIDAYS_API_URL}?date=${date}`;
     return this.http.delete(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        if (response.status === 200) {
-          return response.body;
+        if (response.status === 204) {
+          return;
         } else {
           const error = {
             statusCode: response.status,
@@ -55,12 +65,15 @@ export class FetchHolidayService {
   }
 
   //POST method
-  createHoliday(newHoliday: any): Observable<any[]> {
+  createHoliday(newHoliday: any): Observable<any> {
     const url = this.HOLIDAYS_API_URL;
     return this.http.post(url, newHoliday, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        if (response.status === 200) {
-          return response.body;
+        if (response.status === 201) {
+          return;
+        } else if (response.status === 422) {
+          console.error('Unprocessable Content:', response.statusText);
+          throw 'Unprocessable Content.';
         } else {
           const error = {
             statusCode: response.status,
@@ -78,13 +91,13 @@ export class FetchHolidayService {
 
   //PUT method
   updateHoliday(
-    currentDate: string,
+    holidayDate: string,
     newDate: string,
     newName: string
   ): Observable<any[]> {
     // Create an HttpParams object to set query parameters
     let params = new HttpParams()
-      .set('current_date', currentDate)
+      .set('holiday_date', holidayDate)
       .set('new_date', newDate || '')
       .set('new_name', newName || '');
 
@@ -97,6 +110,9 @@ export class FetchHolidayService {
           map((response: HttpResponse<any>) => {
             if (response.status === 200) {
               return response.body;
+            } else if (response.status === 422) {
+              console.error('Unprocessable Content:', response.statusText);
+              throw 'Unprocessable Content.';
             } else {
               const error = {
                 statusCode: response.status,

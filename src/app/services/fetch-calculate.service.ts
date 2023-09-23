@@ -17,9 +17,10 @@ export class FetchCalculateService {
   getUserDailyCalc(
     userId: number,
     startDate: string,
-    endDate: string
+    endDate: string,
+    specificdate: string
   ): Observable<any> {
-    const url = `${this.DAILY_API_URL}?user_id=${userId}&start=${startDate}&end=${endDate}`;
+    const url = `${this.DAILY_API_URL}?user_id=${userId}&start=${startDate}&end=${endDate}&specific_date=${specificdate}`;
     return this.http.get(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
         if (response.status === 200) {
@@ -51,9 +52,11 @@ export class FetchCalculateService {
   getUserOvertimeCalc(
     userId: number,
     startDate: string,
-    endDate: string
+    endDate: string,
+    approval: boolean,
+    specificDate: string
   ): Observable<any> {
-    const url = `${this.OVERTIME_API_URL}?user_id=${userId}&start=${startDate}&end=${endDate}`;
+    const url = `${this.OVERTIME_API_URL}?user_id=${userId}&start=${startDate}&end=${endDate}&approval=${approval}&specific_date=${specificDate}`;
     return this.http.get(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
         if (response.status === 200) {
@@ -61,9 +64,6 @@ export class FetchCalculateService {
         } else if (response.status === 422) {
           console.error('Unprocessable Content Error:', response.statusText);
           throw 'Unprocessable Content Error.';
-        } else if (response.status === 404) {
-          console.error('Not Found Error:', response.statusText);
-          throw 'User not found or no overtime data available for this user and date range.';
         } else {
           console.error(
             'Error fetching user overtime data. Status code:',
@@ -85,9 +85,10 @@ export class FetchCalculateService {
   getUserUndertimeCalc(
     userId: number,
     startDate: string,
-    endDate: string
+    endDate: string,
+    specificDate: string
   ): Observable<any> {
-    const url = `${this.UNDERTIME_API_URL}?user_id=${userId}&start=${startDate}&end=${endDate}`;
+    const url = `${this.UNDERTIME_API_URL}?user_id=${userId}&start=${startDate}&end=${endDate}&specific_date=${specificDate}`;
     return this.http.get(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
         if (response.status === 200) {

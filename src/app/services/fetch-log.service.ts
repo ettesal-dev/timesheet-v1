@@ -10,12 +10,18 @@ export class FetchLogService {
   private USER_API_URL = 'https://editor.swagger.io/users/logs';
   private ENTRANCE_API_URL = 'https://editor.swagger.io/users/logs/entrance';
   private EXIT_API_URL = 'https://editor.swagger.io/users/logs/exit';
+  private OVERTIME_API_URL = 'https://editor.swagger.io/users/logs/overtime';
 
   constructor(private http: HttpClient) {}
 
   //GET method
-  getUserLogs(userId: number): Observable<any> {
-    const url = `${this.USER_API_URL}?user_id=${userId}`;
+  getUserLogs(
+    userId: number,
+    start: string,
+    end: string,
+    specificDate: string
+  ): Observable<any> {
+    const url = `${this.USER_API_URL}?user_id=${userId}&start=${start}&end=${end}&specific_date=${specificDate}`;
     return this.http.get(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
         if (response.status === 200) {
@@ -23,9 +29,6 @@ export class FetchLogService {
         } else if (response.status === 422) {
           console.error('Unprocessable Content Error:', response.statusText);
           throw 'Unprocessable Content Error.';
-        } else if (response.status === 404) {
-          console.error('Not Found Error:', response.statusText);
-          throw 'User not found or no logs available for this user.';
         } else {
           console.error(
             'Error fetching user logs. Status code:',
@@ -42,18 +45,15 @@ export class FetchLogService {
   }
 
   //DELETE method
-  deleteUserLog(userId: number, logID: number): Observable<any> {
-    const url = `${this.USER_API_URL}?user_id=${userId}&log_date=${logID}`;
+  deleteUserLog(logID: number): Observable<any> {
+    const url = `${this.USER_API_URL}?log_date=${logID}`;
     return this.http.delete(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        if (response.status === 200) {
-          return response.body;
+        if (response.status === 204) {
+          return;
         } else if (response.status === 422) {
           console.error('Unprocessable Content Error:', response.statusText);
           throw 'Unprocessable Content Error.';
-        } else if (response.status === 405) {
-          console.error('Method Not Allowed Response Status:', response.statusText);
-          throw 'Method Not Allowed Response Status.';
         } else {
           console.error(
             'Error deleting user log. Status code:',
@@ -71,15 +71,15 @@ export class FetchLogService {
 
   //PUT method
   updateUserLog(
-    userId: number,
     logId: number,
     date: string,
     time: string,
     comment: string | null,
-    isApproved: boolean
+    isOvertime: boolean,
+    approvedOvertime: string
   ): Observable<any> {
     const commentValue = comment === null ? '' : comment;
-    const url = `${this.USER_API_URL}?user_id=${userId}&log_id=${logId}&date=${date}&time=${time}&comment=${commentValue}&is_approved=${isApproved}`;
+    const url = `${this.USER_API_URL}?log_id=${logId}&date=${date}&time=${time}&comment=${commentValue}&is_overtime=${isOvertime}&approved_overtime=${approvedOvertime}`;
     return this.http.put(url, null, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
         if (response.status === 200) {
@@ -87,9 +87,6 @@ export class FetchLogService {
         } else if (response.status === 422) {
           console.error('Unprocessable Content Error:', response.statusText);
           throw 'Unprocessable Content Error.';
-        } else if (response.status === 405) {
-          console.error('Method Not Allowed Response Status:', response.statusText);
-          throw 'Method Not Allowed Response Status.';
         } else {
           console.error('Error updating log. Status code:', response.status);
           throw 'Failed to update log. Please try again later.';
@@ -110,14 +107,11 @@ export class FetchLogService {
     const url = `${this.ENTRANCE_API_URL}?user_id=${userId}`;
     return this.http.post(url, entranceLogData, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        if (response.status === 200) {
-          return response.body;
+        if (response.status === 201) {
+          return;
         } else if (response.status === 422) {
           console.error('Unprocessable Content Error:', response.statusText);
           throw 'Unprocessable Content Error.';
-        } else if (response.status === 404) {
-          console.error('Not Found Error:', response.statusText);
-          throw 'User not found or unable to create an entrance log.';
         } else {
           console.error(
             'Error creating entrance log. Status code:',
@@ -135,19 +129,51 @@ export class FetchLogService {
     );
   }
 
-  //POST method for logs exit
-  createExitLog(userId: number): Observable<any> {
-    const url = `${this.EXIT_API_URL}?user_id=${userId}`;
-    return this.http.post(url, null, { observe: 'response' }).pipe(
+  //GET method for logs entrance
+  getEntranceLogs(
+    userId: string,
+    start: string,
+    end: string,
+    specificDate: string
+  ): Observable<any> {
+    const url = `${this.ENTRANCE_API_URL}?user_id=${userId}&start=${start}&end=${end}&specific_date=${specificDate}`;
+    return this.http.get(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
         if (response.status === 200) {
           return response.body;
+        } else if (response.status === 404) {
+          console.error('Not Found Error:', response.statusText);
+          throw 'User logs not found.';
+        } else if (response.status === 422) {
+          console.error('Unprocessable Entity Error:', response.statusText);
+          throw 'Invalid data for retrieving user logs.';
+        } else {
+          console.error(
+            'Error retrieving user logs. Status code:',
+            response.status
+          );
+          throw 'Failed to retrieve user logs. Please try again later.';
+        }
+      }),
+      catchError((error) => {
+        console.error('HTTP request error:', error);
+        return throwError(
+          'Failed to retrieve user logs. Please try again later.'
+        );
+      })
+    );
+  }
+
+  //POST method for logs exit
+  createExitLog(userId: number, exitLogData: any): Observable<any> {
+    const url = `${this.EXIT_API_URL}?user_id=${userId}`;
+    return this.http.post(url, exitLogData, { observe: 'response' }).pipe(
+      map((response: HttpResponse<any>) => {
+        if (response.status === 201) {
+          return;
         } else if (response.status === 422) {
           console.error('Unprocessable Content Error:', response.statusText);
           throw 'Unprocessable Content Error.';
-        } else if (response.status === 404) {
-          console.error('Not Found Error:', response.statusText);
-          throw 'User not found or unable to create an exit log.';
         } else {
           console.error(
             'Error creating exit log. Status code:',
@@ -159,6 +185,74 @@ export class FetchLogService {
       catchError((error) => {
         console.error('HTTP request error:', error);
         return throwError('Failed to create exit log. Please try again later.');
+      })
+    );
+  }
+
+  //GET method for logs exit
+  getExitLogs(
+    userId: string,
+    start: string,
+    end: string,
+    specificDate: string
+  ): Observable<any> {
+    const url = `${this.EXIT_API_URL}?user_id=${userId}&start=${start}&end=${end}&specific_date=${specificDate}`;
+    return this.http.get(url, { observe: 'response' }).pipe(
+      map((response: HttpResponse<any>) => {
+        if (response.status === 200) {
+          return response.body;
+        } else if (response.status === 422) {
+          console.error('Unprocessable Entity Error:', response.statusText);
+          throw 'Invalid data for retrieving user logs.';
+        } else {
+          console.error(
+            'Error retrieving user logs. Status code:',
+            response.status
+          );
+          throw 'Failed to retrieve user logs. Please try again later.';
+        }
+      }),
+      catchError((error) => {
+        console.error('HTTP request error:', error);
+        return throwError(
+          'Failed to retrieve user logs. Please try again later.'
+        );
+      })
+    );
+  }
+
+  //GET method for logs overtime
+  getOvertimeLogs(
+    userId: string,
+    start: string,
+    end: string,
+    approvedOvertime: boolean,
+    specificDate: string
+  ): Observable<any> {
+    const url = `${this.OVERTIME_API_URL}?user_id=${userId}&start=${start}&end=${end}&approved_overtime=${approvedOvertime}&specific_date=${specificDate}`;
+    return this.http.get(url, { observe: 'response' }).pipe(
+      map((response: HttpResponse<any>) => {
+        if (response.status === 200) {
+          return response.body;
+        } else if (response.status === 404) {
+          console.error('Not Found Error:', response.statusText);
+          throw 'User overtime logs not found.';
+        } else if (response.status === 422) {
+          console.error('Unprocessable Entity Error:', response.statusText);
+          throw 'Invalid data for retrieving user overtime logs.';
+        } else {
+          console.error(
+            'Error retrieving user overtime logs. Status code:',
+            response.status
+          );
+          throw 'Failed to retrieve user overtime logs. Please try again later.';
+        }
+      }),
+      catchError((error) => {
+        console.error('HTTP request error:', error);
+        return throwError(
+          'Failed to retrieve user overtime logs. Please try again later.'
+        );
       })
     );
   }

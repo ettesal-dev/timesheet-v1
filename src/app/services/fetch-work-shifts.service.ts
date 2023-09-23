@@ -42,14 +42,11 @@ export class FetchWorkShiftsService {
     const url = `${this.WORKSHIFT_API_URL}?shift_id=${shiftId}`;
     return this.http.delete(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        if (response.status === 200) {
-          return response.body;
+        if (response.status === 204) {
+          return;
         } else if (response.status === 422) {
           console.error('Unprocessable Content:', response.statusText);
           throw 'Unprocessable Content.';
-        } else if (response.status === 405) {
-          console.error('Method Not Allowed:', response.statusText);
-          throw 'Method Not Allowed.';
         } else {
           console.error(
             'Error deleting work shift. Status code:',
@@ -72,8 +69,8 @@ export class FetchWorkShiftsService {
     const url = `${this.WORKSHIFT_API_URL}/type1`;
     return this.http.post(url, workShiftData, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        if (response.status === 200) {
-          return response.body;
+        if (response.status === 201) {
+          return;
         } else if (response.status === 404) {
           console.error('Not Found:', response.statusText);
           throw 'Not Found';
@@ -115,9 +112,6 @@ export class FetchWorkShiftsService {
         } else if (response.status === 422) {
           console.error('Unprocessable Content:', response.statusText);
           throw 'Unprocessable Content.';
-        } else if (response.status === 405) {
-          console.error('Method Not Allowed:', response.statusText);
-          throw 'Method Not Allowed.';
         } else {
           console.error(
             'Error updating work shift type1. Status code:',
@@ -140,11 +134,8 @@ export class FetchWorkShiftsService {
     const url = `${this.WORKSHIFT_API_URL}/type2`;
     return this.http.post(url, workShiftData, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        if (response.status === 200) {
-          return response.body;
-        } else if (response.status === 404) {
-          console.error('Not Found:', response.statusText);
-          throw 'Not Found';
+        if (response.status === 201) {
+          return;
         } else if (response.status === 422) {
           console.error('Unprocessable Content:', response.statusText);
           throw 'Unprocessable Content.';

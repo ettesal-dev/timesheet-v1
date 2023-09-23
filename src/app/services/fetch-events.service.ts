@@ -18,9 +18,6 @@ export class FetchEventsService {
       map((response: HttpResponse<any>) => {
         if (response.status === 200) {
           return response.body;
-        } else if (response.status === 404) {
-          console.error('Not Found Error:', response.statusText);
-          throw 'Events not found.';
         } else {
           console.error(
             'Error retrieving events. Status code:',
@@ -41,11 +38,8 @@ export class FetchEventsService {
     const url = `${this.EVENT_API_URL}?event_id=${eventId}`;
     return this.http.delete(url, { observe: 'response' }).pipe(
       map((response: HttpResponse<any>) => {
-        if (response.status === 200) {
+        if (response.status === 204) {
           return;
-        } else if (response.status === 405) {
-          console.error('Not Found Error:', response.statusText);
-          throw 'Event not found for the specified ID.';
         } else if (response.status === 422) {
         } else {
           console.error('Error deleting event. Status code:', response.status);
@@ -65,11 +59,8 @@ export class FetchEventsService {
       .post(this.EVENT_API_URL, eventData, { observe: 'response' })
       .pipe(
         map((response: HttpResponse<any>) => {
-          if (response.status === 200) {
+          if (response.status === 201) {
             return response.body;
-          } else if (response.status === 404) {
-            console.error('Not Found:', response.status);
-            throw 'Not Found.';
           } else if (response.status === 422) {
             console.error('Unprocessable Content:', response.status);
             throw 'Unprocessable Content.';
@@ -126,9 +117,6 @@ export class FetchEventsService {
       map((response: HttpResponse<any>) => {
         if (response.status === 200) {
           return response.body;
-        } else if (response.status === 404) {
-          console.error('Not Found Error:', response.statusText);
-          throw 'User events not found.';
         } else if (response.status === 422) {
           console.error('Unprocessable Entity Error:', response.statusText);
           throw 'Invalid data for retrieving user events.';
