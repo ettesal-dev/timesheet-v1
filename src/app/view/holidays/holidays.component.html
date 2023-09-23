@@ -1,38 +1,65 @@
 <!-- Form Holiday -->
-<h3 class="pb-3">ایجاد تعطیلات</h3>
-<form [formGroup]="holidayForm" (ngSubmit)="postHoliday()">
-  <label for="name" class="pb-2">نام :</label>
-  <input
-    type="text"
-    id="name"
-    formControlName="name"
-    aria-label="default input example"
-    cFormControl
-  />
-  <p *ngIf="name.invalid && (name.dirty || name.touched)" class="text-danger">
-    <span *ngIf="name.hasError('required')">Name is required</span>
-    <span *ngIf="name.hasError('minlength')"
-      >Name must be at least 3 characters long</span
-    >
-  </p>
+<h3 class="pb-3">ایجاد لیست تعطیلات</h3>
+<div >
+  <form [formGroup]="holidayForm" (ngSubmit)="postHoliday()" >
+    <ng-container formArrayName="holidayList">
+      <button type="button" cButton color="dark" (click)="addHolidayList()">
+        اضافه
+      </button>
+      <br />
+      <ng-container
+        *ngFor="let attendees of holidayList.controls; let index = index"
+      >
+        <div [formGroupName]="index">
+          <label for="name" class="pb-2">نام :</label>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            aria-label="default input example"
+            cFormControl
+          />
+          <p
+            *ngIf="name.invalid && (name.dirty || name.touched)"
+            class="text-danger"
+          >
+            <span *ngIf="name.hasError('required')">Name is required</span>
+            <span *ngIf="name.hasError('minlength')"
+              >Name must be at least 3 characters long</span
+            >
+          </p>
 
-  <label for="date" class="pb-2">تاریخ :</label>
-  <input
-    type="date"
-    id="date"
-    formControlName="date"
-    aria-label="default input example"
-    cFormControl
-  />
-  <p *ngIf="date.invalid && (date.dirty || date.touched)" class="text-danger">
-    <span *ngIf="date.hasError('required')">Date is required</span>
-  </p>
-  <br />
-  <button type="submit" cButton color="dark" [disabled]="holidayForm.invalid">
-    ایجاد
-  </button>
-</form>
+          <label for="date" class="pb-2">تاریخ :</label>
+          <input
+            type="date"
+            id="date"
+            formControlName="date"
+            aria-label="default input example"
+            cFormControl
+          />
+          <p
+            *ngIf="date.invalid && (date.dirty || date.touched)"
+            class="text-danger"
+          >
+            <span *ngIf="date.hasError('required')">Date is required</span>
+          </p>
+          <br />
+          <button (click)="deleteHolidayList(index)" cButton color="dark">
+            حذف
+          </button>
+
+        </div>
+      </ng-container>
+    </ng-container>
+    <br />
+    <button type="submit" cButton color="dark" [disabled]="holidayForm.invalid">
+      ایجاد
+    </button>
+  </form>
+</div>
+
 <hr />
+
 <!-- Table Holiday -->
 <h3 class="pb-3">لیست تعطیلات</h3>
 <div class="d-flex flex-row">
@@ -148,14 +175,6 @@
           اعمال
         </button>
       </c-modal-footer>
-      <!-- <button type="submit" cButton color="dark" [disabled]="holidayForm.invalid">
-        Add
-      </button> -->
     </form>
   </c-modal-body>
 </c-modal>
-
-
-
-
-

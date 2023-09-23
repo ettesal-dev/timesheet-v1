@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray, FormBuilder } from '@angular/forms';
 import { HolidayService } from 'src/app/services/holiday.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class HolidaysComponent {
   startDate: string = '';
   endDate: string = '';
 
-  constructor(public holiday: HolidayService) {
+  constructor(public holiday: HolidayService, private fb: FormBuilder) {
     this.getHolidays();
   }
 
@@ -23,12 +23,34 @@ export class HolidaysComponent {
     console.log(this.dateHoliday);
   }
   //get data from form for post new holiday
-  name = new FormControl('', [Validators.required, Validators.minLength(3)]);
+  name = new FormControl('', [Validators.required]);
   date = new FormControl('', [Validators.required]);
-  holidayForm = new FormGroup({
-    name: this.name,
-    date: this.date,
+  holidayArray = this.fb.group({
+    name:this.name,
+    date:this.date
   });
+
+  holidayForm = this.fb.group({
+    holidayList: this.fb.array([], Validators.required),
+  });
+
+  get holidayList() {
+    return this.holidayForm.controls['holidayList'] as FormArray;
+  }
+
+  addHolidayList() {
+    const ad = this.fb.group({
+      name: new FormControl('', [Validators.required]),
+      date: new FormControl('', [Validators.required])
+    });
+
+    this.holidayList.push(ad);
+  }
+
+  deleteHolidayList(index: number) {
+    this.holidayList.removeAt(index);
+  }
+  
   //get data from modal for update a holiday
   updateName = new FormControl('', [
     Validators.required,
@@ -39,6 +61,8 @@ export class HolidaysComponent {
     updateName: this.updateName,
     updateDate: this.updateDate,
   });
+
+
   //GET data
   getHolidays() {
     const startDate = new Date('2023-12-01');
@@ -55,8 +79,9 @@ export class HolidaysComponent {
   }
   //POST data
   postHoliday() {
-    this.holiday.createHoliday(this.holidayForm.value);
+    //this.holiday.createHoliday(this.holidayForm.value);
     this.getHolidays();
+    console.log("holiday form array",this.holidayForm.value.holidayList)
     this.holidayForm.reset();
   }
   //PUT data
