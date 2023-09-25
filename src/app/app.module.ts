@@ -12,10 +12,15 @@ import { DefaultHeaderComponent } from './default-header/default-header.componen
 
 //modules
 import { ViewModule } from './view/view.module';
+import { HolidayModule } from './holiday/holiday.module';
 
 //coreui components
 import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { NgScrollbarModule } from 'ngx-scrollbar';
+
+//persian datepicker
+import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import {
   AvatarModule,
@@ -37,7 +42,8 @@ import {
   TabsModule,
   UtilitiesModule,
   TableModule,
-  CalloutModule 
+  CalloutModule,
+  
 } from '@coreui/angular';
 
 
@@ -93,6 +99,9 @@ function initializeKeycloak(keycloak: KeycloakService) {
     TableModule,
     UtilitiesModule,
     CalloutModule,
+    NgPersianDatepickerModule,
+    ReactiveFormsModule,
+    HolidayModule,
     JwtModule.forRoot({})  
   ],
   providers: [

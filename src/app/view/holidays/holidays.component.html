@@ -1,7 +1,7 @@
 <!-- Form Holiday -->
 <h3 class="pb-3">ایجاد لیست تعطیلات</h3>
-<div >
-  <form [formGroup]="holidayForm" (ngSubmit)="postHoliday()" >
+<div>
+  <form [formGroup]="holidayForm" (ngSubmit)="postHoliday()">
     <ng-container formArrayName="holidayList">
       <button type="button" cButton color="dark" (click)="addHolidayList()">
         اضافه
@@ -30,13 +30,15 @@
           </p>
 
           <label for="date" class="pb-2">تاریخ :</label>
-          <input
-            type="date"
-            id="date"
-            formControlName="date"
-            aria-label="default input example"
-            cFormControl
-          />
+          <ng-persian-datepicker
+            ><input
+              type="text"
+              id="date"
+              formControlName="date"
+              aria-label="default input example"
+              cFormControl
+            />
+          </ng-persian-datepicker>
           <p
             *ngIf="date.invalid && (date.dirty || date.touched)"
             class="text-danger"
@@ -47,7 +49,6 @@
           <button (click)="deleteHolidayList(index)" cButton color="dark">
             حذف
           </button>
-
         </div>
       </ng-container>
     </ng-container>
@@ -150,7 +151,10 @@
       </p>
 
       <label for="date" class="pb-2">تاریخ :</label>
-      <input type="date" id="date" formControlName="updateDate" cFormControl />
+      <ng-persian-datepicker>
+        <input type="text" id="date" formControlName="updateDate" cFormControl
+      />
+      </ng-persian-datepicker>
       <p
         *ngIf="updateDate.invalid && (updateDate.dirty || updateDate.touched)"
         class="text-danger"

@@ -4,6 +4,10 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guard/auth.guard';
 import { LayoutComponent } from './layout/layout.component';
 import { DashboardComponent } from './view/dashboard/dashboard.component';
+import { SubmitComponent } from './view/submit/submit.component';
+import { ReportComponent } from './view/report/report.component';
+import { SettingComponent } from './view/setting/setting.component';
+
 import { ShiftsComponent } from './view/shifts/shifts.component';
 import { LogsComponent } from './view/logs/logs.component';
 import { HolidaysComponent } from './view/holidays/holidays.component';
@@ -35,21 +39,33 @@ const routes: Routes = [
         component: DashboardComponent
       },
       {
-        path:'shifts',
-        component: ShiftsComponent
+        path:'submit',
+        component: SubmitComponent
       },
       {
-        path:'logs',
-        component: LogsComponent
+        path:'report',
+        component: ReportComponent
       },
       {
-        path:'holidays',
-        component: HolidaysComponent
+        path:'setting',
+        component: SettingComponent
       },
-      {
-        path:'events',
-        component: EventsComponent
-      }
+      // {
+      //   path:'shifts',
+      //   component: ShiftsComponent
+      // },
+      // {
+      //   path:'logs',
+      //   component: LogsComponent
+      // },
+      // {
+      //   path:'holidays',
+      //   component: HolidaysComponent
+      // },
+      // {
+      //   path:'events',
+      //   component: EventsComponent
+      // }
     ]
   },
   {

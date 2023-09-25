@@ -9,28 +9,23 @@ export const navItems: INavData[] = [
     
   },
   {
-    name: 'شیفت ها',
-    url: './shifts',
+    name: 'ثبت',
+    url: './submit',
     iconComponent: { name: 'cil-list-rich' }
     
   },
   {
     name: 'گزارش ها',
-    url: './logs',
+    url: './report',
     iconComponent: { name: 'cil-calendar' }
     
   },
   {
-    name: 'تعطیلات',
-    url: './holidays',
+    name: 'تنظیمات',
+    url: './setting',
     iconComponent: { name: 'cil-clock' }
     
   },
-  {
-    name: 'رویداد ها',
-    url: './events',
-    iconComponent: { name: 'cil-clock' }
-    
-  },
+  
   
 ];

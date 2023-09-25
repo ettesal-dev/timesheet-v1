@@ -1,0 +1,56 @@
+<c-modal
+  id="liveDemoModal"
+  [visible]="visible.visible"
+  (visibleChange)="visible.handleLiveDemoChange($event)"
+>
+  <c-modal-header>
+    <h5 cModalTitle>بروزرسانی تعطیلات</h5>
+    <button (click)="visible.toggleLiveDemo()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body
+    ><form [formGroup]="holidayUpdateForm" (ngSubmit)="putHoliday()">
+      <label for="name" class="pb-2">نام :</label>
+      <input type="text" id="name" formControlName="updateName" cFormControl />
+      <p
+        *ngIf="updateName.invalid && (updateName.dirty || updateName.touched)"
+        class="text-danger"
+      >
+        <span *ngIf="updateName.hasError('required')">Name is required</span>
+        <span *ngIf="updateName.hasError('minlength')"
+          >Name must be at least 3 characters long</span
+        >
+      </p>
+
+      <label for="date" class="pb-2">تاریخ :</label>
+      <ng-persian-datepicker>
+        <input
+          type="text"
+          id="date"
+          formControlName="updateDate"
+          cFormControl
+        />
+      </ng-persian-datepicker>
+      <p
+        *ngIf="updateDate.invalid && (updateDate.dirty || updateDate.touched)"
+        class="text-danger"
+      >
+        <span *ngIf="updateDate.hasError('required')">Date is required</span>
+      </p>
+      <br />
+      <c-modal-footer>
+        <button cButton color="secondary" (click)="visible.toggleLiveDemo()">
+          بستن
+        </button>
+        <button
+          type="submit"
+          cButton
+          color="dark"
+          [disabled]="holidayUpdateForm.invalid"
+          (click)="putHoliday()"
+        >
+          اعمال
+        </button>
+      </c-modal-footer>
+    </form>
+  </c-modal-body>
+</c-modal>

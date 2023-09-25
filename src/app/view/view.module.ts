@@ -3,18 +3,25 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { ShiftsComponent } from './shifts/shifts.component';
 import { LogsComponent } from './logs/logs.component';
 import { HolidaysComponent } from './holidays/holidays.component';
 import { EventsComponent } from './events/events.component';
 
+//other modules
+import { HolidayModule } from '../holiday/holiday.module';
+
+import { SubmitComponent } from './submit/submit.component';
+import { ReportComponent } from './report/report.component';
+import { SettingComponent } from './setting/setting.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 //coreui components
-import { CalloutModule, CardModule , ListGroupModule, ModalModule, OffcanvasModule, TableModule, UtilitiesModule, ButtonModule,FormModule    } from '@coreui/angular';
+import { CalloutModule, CardModule , ListGroupModule, ModalModule, OffcanvasModule, TableModule, UtilitiesModule, ButtonModule,FormModule, NavModule,TabsModule } from '@coreui/angular';
 //persian number pipe
 import { PersianNumberPipe } from './../persian-number.pipe';
-
-
+//persian datepicker
+import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
 
 
 
@@ -25,7 +32,10 @@ import { PersianNumberPipe } from './../persian-number.pipe';
     LogsComponent,
     HolidaysComponent,
     EventsComponent,
-    PersianNumberPipe
+    PersianNumberPipe,
+    SubmitComponent,
+    ReportComponent,
+    SettingComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +50,10 @@ import { PersianNumberPipe } from './../persian-number.pipe';
     ButtonModule,
     FormModule,
     FormsModule,
-     
+    HolidayModule,
+    NgPersianDatepickerModule,
+    NavModule,
+    TabsModule 
   ],
   exports:[
     DashboardComponent,

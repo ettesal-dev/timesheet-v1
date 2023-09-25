@@ -1,0 +1,17 @@
+<c-nav variant="tabs">
+  <a [active]="true" [cTabContent]="tabContent" [tabPaneIdx]="0" cNavLink
+    >تعطیلات</a
+  >
+  <a [cTabContent]="tabContent" [tabPaneIdx]="1" cNavLink>شیفت‌ها</a>
+  <a [cTabContent]="tabContent" [tabPaneIdx]="2" cNavLink>شیفت کاربران</a>
+</c-nav>
+<c-tab-content #tabContent="cTabContent">
+  <c-tab-pane class="p-3">
+    <app-add-holiday></app-add-holiday>
+    <hr />
+    <app-list-holiday></app-list-holiday>
+    <app-update-holiday></app-update-holiday>
+  </c-tab-pane>
+  <c-tab-pane class="p-3"> workshifts </c-tab-pane>
+  <c-tab-pane class="p-3"> usershifts </c-tab-pane>
+</c-tab-content>
