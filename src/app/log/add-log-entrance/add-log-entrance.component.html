@@ -1,0 +1,35 @@
+<p>{{ userInfo.userName }}</p>
+<p>{{ userInfo.userToken }}</p>
+
+<h3 class="pb-2">ثبت زمان ورود</h3>
+<form [formGroup]="logEntranceForm" (ngSubmit)="addLogEntrance()">
+  <label for="date" class="pb-2">تاریخ :</label>
+  <ng-persian-datepicker>
+    <input
+      type="text"
+      id="date"
+      formControlName="date"
+      aria-label="default input example"
+      cFormControl
+    />
+  </ng-persian-datepicker>
+  <label for="time" class="pb-2">ساعت ورود :</label>
+  <input
+    type="time"
+    id="time"
+    formControlName="time"
+    aria-label="default input example"
+    cFormControl
+  />
+  <label for="comment" class="pb-2">یادداشت :</label>
+  <textarea cFormControl id="comment" rows="3" formControlName="comment"></textarea>
+  <br />
+  <button
+    type="submit"
+    cButton
+    color="dark"
+    [disabled]="logEntranceForm.invalid"
+  >
+    ایجاد
+  </button>
+</form>

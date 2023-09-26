@@ -1,5 +1,5 @@
 <h3 class="pb-3">ایجاد شیفت کاربران</h3>
-<form [formGroup]="updateUserShiftForm" (ngSubmit)="addUserShift()">
+<form [formGroup]="userShiftForm" (ngSubmit)="addUserShift()">
   <label for="userId" class="pb-2">نام کاربر :</label>
   <select
     formControlName="userId"
@@ -47,7 +47,7 @@
     type="submit"
     cButton
     color="dark"
-    [disabled]="updateUserShiftForm.invalid"
+    [disabled]="userShiftForm.invalid"
   >
     ایجاد
   </button>

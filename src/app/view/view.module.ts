@@ -11,6 +11,8 @@ import { EventsComponent } from './events/events.component';
 //other modules
 import { HolidayModule } from '../holiday/holiday.module';
 import { UserShiftModule } from '../user-shift/user-shift.module';
+import { LogModule } from '../log/log.module';
+import { UserModule } from '../user/user.module';
 
 import { SubmitComponent } from './submit/submit.component';
 import { ReportComponent } from './report/report.component';
@@ -65,6 +67,8 @@ import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
     FormsModule,
     HolidayModule,
     UserShiftModule,
+    LogModule,
+    UserModule,
     NgPersianDatepickerModule,
     NavModule,
     TabsModule,

@@ -48,7 +48,7 @@ export class AddUserShiftComponent {
   activation = new FormControl('',[Validators.required])
   expiration = new FormControl('')
 
-  updateUserShiftForm = new FormGroup({
+  userShiftForm = new FormGroup({
     userId : this.userId,
     shiftId : this.shiftId,
     activation : this.activation,
@@ -58,6 +58,6 @@ export class AddUserShiftComponent {
   //POST
   addUserShift(){
     //console.log(this.updateUserShiftForm.value)
-    this.updateUserShiftForm.reset()
+    this.userShiftForm.reset()
   }
 }
