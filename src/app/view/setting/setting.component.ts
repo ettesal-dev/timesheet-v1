@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./setting.component.scss']
 })
 export class SettingComponent {
-
+  items = [1, 2, 3, 4];
 }

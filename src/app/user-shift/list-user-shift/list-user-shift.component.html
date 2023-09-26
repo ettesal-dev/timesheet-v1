@@ -1,0 +1,67 @@
+<h3 class="pb-3">لیست شیفت کاربران</h3>
+<label for="start" class="pb-2">تاریخ شروع :</label>
+<ng-persian-datepicker>
+  <input
+    cFormControl
+    [formControl]="startDate"
+    type="text"
+    aria-label="default input example"
+    id="start"
+  />
+</ng-persian-datepicker>
+<label for="end" class="pb-2">تاریخ پایان :</label>
+<ng-persian-datepicker>
+  <input
+    cFormControl
+    [formControl]="endDate"
+    type="text"
+    aria-label="default input example"
+    id="end"
+  />
+</ng-persian-datepicker>
+<label for="user" class="pb-2">انتخاب کاربر :</label>
+<select
+    [formControl]="specificUser"
+    aria-label="Default select example"
+    cSelect
+    id="user"
+  >
+    <option *ngFor="let user of users" [value]="user.user_id">
+      {{ user.user_name }}
+    </option>
+  </select>
+<br />
+<button  cButton color="dark" (click)="filter()" class="mb-2">اعمال</button>
+<br />
+<table cTable>
+    <thead cTableColor="dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">نام کاربر</th>
+        <th scope="col">نوع شیف</th>
+        <th scope="col">زمان شروع</th>
+        <th scope="col">زمان پایان</th>
+        <th scope="col">تغییر</th>
+        <th scope="col">حذف</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let userShift of userShifts; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>
+          {{ userShift.name }}
+        </td>
+        <td>نوع: {{ userShift.type }}</td>
+        <td>{{ userShift.start_time }}</td>
+        <td>{{ userShift.end_time }}</td>
+        <td>
+          <button (click)="visible.toggleLiveDemo(specificUser.value,userShift.id)" cButton color="dark">تغییر</button>
+        </td>
+        <td>
+          <button (click)="deleteUserShift(userShift.id)" cButton color="dark">
+            حذف
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

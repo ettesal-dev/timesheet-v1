@@ -10,6 +10,7 @@ import { EventsComponent } from './events/events.component';
 
 //other modules
 import { HolidayModule } from '../holiday/holiday.module';
+import { UserShiftModule } from '../user-shift/user-shift.module';
 
 import { SubmitComponent } from './submit/submit.component';
 import { ReportComponent } from './report/report.component';
@@ -17,13 +18,25 @@ import { SettingComponent } from './setting/setting.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 //coreui components
-import { CalloutModule, CardModule , ListGroupModule, ModalModule, OffcanvasModule, TableModule, UtilitiesModule, ButtonModule,FormModule, NavModule,TabsModule } from '@coreui/angular';
+import {
+  CalloutModule,
+  CardModule,
+  ListGroupModule,
+  ModalModule,
+  OffcanvasModule,
+  TableModule,
+  UtilitiesModule,
+  ButtonModule,
+  FormModule,
+  NavModule,
+  TabsModule,
+  AccordionModule,
+  SharedModule
+} from '@coreui/angular';
 //persian number pipe
 import { PersianNumberPipe } from './../persian-number.pipe';
 //persian datepicker
 import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
-
-
 
 @NgModule({
   declarations: [
@@ -35,7 +48,7 @@ import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
     PersianNumberPipe,
     SubmitComponent,
     ReportComponent,
-    SettingComponent
+    SettingComponent,
   ],
   imports: [
     CommonModule,
@@ -43,7 +56,7 @@ import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
     CalloutModule,
     CardModule,
     ListGroupModule,
-    ModalModule ,
+    ModalModule,
     OffcanvasModule,
     TableModule,
     UtilitiesModule,
@@ -51,16 +64,19 @@ import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
     FormModule,
     FormsModule,
     HolidayModule,
+    UserShiftModule,
     NgPersianDatepickerModule,
     NavModule,
-    TabsModule 
+    TabsModule,
+    AccordionModule,
+    SharedModule
   ],
-  exports:[
+  exports: [
     DashboardComponent,
     ShiftsComponent,
     LogsComponent,
     HolidaysComponent,
-    EventsComponent
-  ]
+    EventsComponent,
+  ],
 })
-export class ViewModule { }
+export class ViewModule {}

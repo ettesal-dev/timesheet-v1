@@ -14,7 +14,7 @@ export class FetchHolidayService {
   toggleLiveDemo(date?:string) {
     this.visible = !this.visible;
     this.holidayDate = date
-    console.log(this.holidayDate)
+    //console.log(this.holidayDate)
   }
 
   handleLiveDemoChange(event: any) {

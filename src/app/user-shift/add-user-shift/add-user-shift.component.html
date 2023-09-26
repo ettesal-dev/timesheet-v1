@@ -1,0 +1,54 @@
+<h3 class="pb-3">ایجاد شیفت کاربران</h3>
+<form [formGroup]="updateUserShiftForm" (ngSubmit)="addUserShift()">
+  <label for="userId" class="pb-2">نام کاربر :</label>
+  <select
+    formControlName="userId"
+    id="userId"
+    aria-label="Default select example"
+    cSelect
+  >
+    <option *ngFor="let user of users" [value]="user.user_id">
+      {{ user.user_name }}
+    </option>
+  </select>
+  <label for="shiftId" class="pb-2">نام شیفت :</label>
+  <select
+    formControlName="shiftId"
+    id="shiftId"
+    aria-label="Default select example"
+    cSelect
+  >
+    <option *ngFor="let shift of shifts" [value]="shift.shift_id">
+      {{ shift.shift_name }}
+    </option>
+  </select>
+  <label for="activation" class="pb-2">تاریخ فعال‌سازی :</label>
+  <ng-persian-datepicker>
+    <input
+      type="text"
+      id="activation"
+      formControlName="activation"
+      aria-label="default input example"
+      cFormControl
+    />
+  </ng-persian-datepicker>
+  <label for="expiration" class="pb-2">تاریخ انقضا :</label>
+  <ng-persian-datepicker>
+    <input
+      type="text"
+      id="expiration"
+      formControlName="expiration"
+      aria-label="default input example"
+      cFormControl
+    />
+  </ng-persian-datepicker>
+  <br />
+  <button
+    type="submit"
+    cButton
+    color="dark"
+    [disabled]="updateUserShiftForm.invalid"
+  >
+    ایجاد
+  </button>
+</form>

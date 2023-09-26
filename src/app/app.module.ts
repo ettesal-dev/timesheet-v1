@@ -13,6 +13,7 @@ import { DefaultHeaderComponent } from './default-header/default-header.componen
 //modules
 import { ViewModule } from './view/view.module';
 import { HolidayModule } from './holiday/holiday.module';
+import { UserShiftModule } from './user-shift/user-shift.module';
 
 //coreui components
 import { IconModule, IconSetService } from '@coreui/icons-angular';
@@ -102,6 +103,7 @@ function initializeKeycloak(keycloak: KeycloakService) {
     NgPersianDatepickerModule,
     ReactiveFormsModule,
     HolidayModule,
+    UserShiftModule,
     JwtModule.forRoot({})  
   ],
   providers: [

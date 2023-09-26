@@ -41,7 +41,7 @@ export class AddHolidayComponent {
 
   //POST data
   postHoliday() {
-    console.log("holiday form array",this.holidayForm.value.holidayList)
+    //console.log("holiday form array",this.holidayForm.value.holidayList)
     this.holidayForm.reset();
   }
 }

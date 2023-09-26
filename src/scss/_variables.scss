@@ -6,8 +6,8 @@
 
 // Color system
 
-// $white:     #fff;
-// $gray-base: #3c4b64;
+ $white:     #fff;
+ //$gray-base: #3c4b64;
 // $gray-100:  #ebedef;
 // $gray-200:  #d8dbe0;
 // $gray-300:  #c4c9d0;
@@ -63,7 +63,7 @@
 // scss-docs-end colors-map
 
 // $primary-dark:  #1f1498;
-// $primary:       #321fdb;
+ $primary:       #3c4b64;
 // $primary-50:    #988fed;
 // $primary-25:    #ccc7f6;
 
@@ -120,7 +120,7 @@
 // $medium-emphasis-dark:  rgba(shift-color($gray-base, +26), .6);
 // $disabled-dark:         rgba(shift-color($gray-base, +26), .38);
 
-// $high-emphasis-light:    rgba($white, .87);
+ $high-emphasis-light:    rgba($white, .87);
 // $medium-emphasis-light:  rgba($white, .6);
 // $disabled-light:         rgba($white, .38);
 
@@ -412,8 +412,8 @@
 // $box-shadow-lg:               0 1rem 3rem rgba($black, .175);
 // $box-shadow-inset:            inset 0 1px 2px rgba($black, .075);
 
-// $component-active-color:      $high-emphasis-light;
-// $component-active-bg:         $primary;
+ $component-active-color:      $high-emphasis-light;
+ $component-active-bg:         $primary;
 
 // $caret-width:                 .3em;
 // $caret-vertical-align:        $caret-width * .85;
@@ -955,8 +955,8 @@
 // $nav-tabs-link-active-border-color: $gray-300 $gray-300 $nav-tabs-link-active-bg;
 
 // $nav-pills-border-radius:           $border-radius;
-// $nav-pills-link-active-color:       $component-active-color;
-// $nav-pills-link-active-bg:          $component-active-bg;
+ $nav-pills-link-active-color:       $component-active-color;
+ $nav-pills-link-active-bg:          $component-active-bg;
 // scss-docs-end nav-variables
 
 // Navbar

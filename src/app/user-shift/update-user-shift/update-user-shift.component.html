@@ -1,0 +1,81 @@
+<c-modal
+  id="liveDemoModal"
+  [visible]="visible.visible"
+  (visibleChange)="visible.handleLiveDemoChange($event)"
+>
+  <c-modal-header>
+    <h5 cModalTitle>بروزرسانی تعطیلات</h5>
+    <button (click)="visible.toggleLiveDemo()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <form [formGroup]="userShiftUpdateForm" (ngSubmit)="patchUserShift()">
+      <!-- <label for="userId" class="pb-2">نام کاربر :</label>
+      <select
+        formControlName="userId"
+        id="userId"
+        aria-label="Default select example"
+        cSelect
+      >
+        <option *ngFor="let user of users" [value]="user.user_id">
+          {{ user.user_name }}
+        </option>
+      </select>
+      <label for="shiftId" class="pb-2">نام شیفت :</label>
+      <select
+        formControlName="shiftId"
+        id="shiftId"
+        aria-label="Default select example"
+        cSelect
+      >
+      <option *ngFor="let shift of shifts" [value]="shift.shift_id">
+        {{ shift.shift_name }}
+      </option>
+      </select> -->
+      <label for="isExpired" class="pb-2">وضعیت فعالی :</label>
+      <select
+        formControlName="isExpired"
+        id="isExpired"
+        aria-label="Default select example"
+        cSelect
+      >
+        <option value="true">فعال</option>
+        <option value="false">غیر فعال</option>
+      </select>
+      <label for="activation" class="pb-2">تاریخ فعال‌سازی :</label>
+      <ng-persian-datepicker>
+        <input
+          type="text"
+          id="activation"
+          formControlName="activation"
+          aria-label="default input example"
+          cFormControl
+        />
+      </ng-persian-datepicker>
+      <label for="expiration" class="pb-2">تاریخ انقضا :</label>
+      <ng-persian-datepicker>
+        <input
+          type="text"
+          id="expiration"
+          formControlName="expiration"
+          aria-label="default input example"
+          cFormControl
+        />
+      </ng-persian-datepicker>
+      <br />
+      <c-modal-footer>
+        <button cButton color="secondary" (click)="visible.toggleLiveDemo()">
+          بستن
+        </button>
+        <button
+          type="submit"
+          cButton
+          color="dark"
+          [disabled]="userShiftUpdateForm.invalid"
+          (click)="patchUserShift()"
+        >
+          اعمال
+        </button>
+      </c-modal-footer>
+    </form>
+  </c-modal-body>
+</c-modal>

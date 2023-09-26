@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { FetchHolidayService } from '../fetch-holiday.service';
 
@@ -19,19 +19,26 @@ export class ListHolidayComponent {
       date: "2022-07-09"
     }
   ];
+  //for filter holidays
   startDate:any = new FormControl();
   endDate:any = new FormControl();
   constructor(public visible: FetchHolidayService){}
 
-  getDate(date: string) {
-    
+  //GET
+  //it must be called in constructor or onInit(prefered) for get data at first of rendering componenet
+  getHoliday(start:any, end:any){
+
   }
 
-  //GET data
-  getHolidays() {
+
+  //filter data
+  //is it necessary to call it in onInit for any rendering between pages
+  filter() {
     //for send to api
-    const start = this.startDate ? new Date(this.startDate) : null;
-    const end = this.endDate ? new Date(this.endDate) : null;
+    const start = this.startDate.value ? new Date(this.startDate.value) : null;
+    const end = this.endDate.value ? new Date(this.endDate.value) : null;
+    //console.log(start,end)
+    this.getHoliday(start, end)
     
   }
   //DELETE

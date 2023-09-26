@@ -1,24 +1,26 @@
 <h3 class="pb-3">لیست تعطیلات</h3>
-<p>تاریخ شروع :</p>
+<label for="start" class="pb-2">تاریخ شروع :</label>
 <ng-persian-datepicker>
   <input
     cFormControl
     [formControl]="startDate"
     type="text"
-    (change)="getHolidays()"
     aria-label="default input example"
+    id="start"
   />
 </ng-persian-datepicker>
-<p>تاریخ پایان :</p>
+<label for="end" class="pb-2">تاریخ پایان :</label>
 <ng-persian-datepicker>
   <input
     cFormControl
     [formControl]="endDate"
     type="text"
-    (change)="getHolidays()"
     aria-label="default input example"
+    id="end"
   />
 </ng-persian-datepicker>
+<br />
+<button  cButton color="dark" (click)="filter()" class="mb-2">اعمال</button>
 
 <br />
 <table cTable>

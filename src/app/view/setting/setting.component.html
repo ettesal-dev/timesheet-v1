@@ -1,10 +1,11 @@
-<c-nav variant="tabs">
+<c-nav variant="pills">
   <a [active]="true" [cTabContent]="tabContent" [tabPaneIdx]="0" cNavLink
     >تعطیلات</a
   >
   <a [cTabContent]="tabContent" [tabPaneIdx]="1" cNavLink>شیفت‌ها</a>
   <a [cTabContent]="tabContent" [tabPaneIdx]="2" cNavLink>شیفت کاربران</a>
 </c-nav>
+<hr />
 <c-tab-content #tabContent="cTabContent">
   <c-tab-pane class="p-3">
     <app-add-holiday></app-add-holiday>
@@ -13,5 +14,11 @@
     <app-update-holiday></app-update-holiday>
   </c-tab-pane>
   <c-tab-pane class="p-3"> workshifts </c-tab-pane>
-  <c-tab-pane class="p-3"> usershifts </c-tab-pane>
+  <c-tab-pane class="p-3">
+    <app-add-user-shift></app-add-user-shift>
+    <hr />
+    <app-list-user-shift></app-list-user-shift>
+    <app-update-user-shift></app-update-user-shift>
+  </c-tab-pane>
 </c-tab-content>
+
