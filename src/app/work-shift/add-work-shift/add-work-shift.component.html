@@ -1,0 +1,162 @@
+<c-nav variant="pills">
+  <a [active]="true" [cTabContent]="tabContent" [tabPaneIdx]="0" cNavLink
+    >نوع 1(هفتگی)</a
+  >
+  <a [cTabContent]="tabContent" [tabPaneIdx]="1" cNavLink>نوع 2(روزانه)</a>
+</c-nav>
+<hr />
+<c-tab-content #tabContent="cTabContent">
+  <c-tab-pane class="p-3">
+    <h3 class="pb-3">ایجاد شیفت</h3>
+    <form [formGroup]="workShiftTypeOneForm" (ngSubmit)="postTypeOne()">
+      <label for="nameTypeOne" class="pb-2">نام شیفت :</label>
+      <input
+        type="text"
+        id="nameTypeOne"
+        formControlName="nameTypeOne"
+        aria-label="default input example"
+        cFormControl
+      />
+      <label for="startTypeOne" class="pb-2">ساعت شروع :</label>
+      <input
+        type="time"
+        id="startTypeOne"
+        formControlName="startTypeOne"
+        aria-label="default input example"
+        cFormControl
+      />
+      <label for="endTypeOne" class="pb-2">ساعت پایان :</label>
+      <input
+        type="time"
+        id="endTypeOne"
+        formControlName="endTypeOne"
+        aria-label="default input example"
+        cFormControl
+      />
+      <label for="flexTimeTypeOne" class="pb-2">زمان شناور :</label>
+      <input
+        type="time"
+        id="flexTimeTypeOne"
+        formControlName="flexTimeTypeOne"
+        aria-label="default input example"
+        cFormControl
+      />
+      <ng-container formArrayName="days">
+        <label for="name" class="pb-2">روز‌ها :</label>
+        <button
+          type="button"
+          cButton
+          color="dark"
+          (click)="addDays()"
+          class="my-2"
+        >
+          اضافه
+        </button>
+        <ng-container *ngFor="let days of days.controls; let index = index">
+          <div [formGroupName]="index">
+            <label for="name" class="pb-2">انتخاب روز :</label>
+            <select
+              formControlName="attendeesName"
+              id="name"
+              aria-label="Default select example"
+              cSelect
+            >
+              <option *ngFor="let number of numbers" [value]="number.value">
+                {{ number.name }}
+              </option>
+            </select>
+            <button
+              (click)="deleteDays(index)"
+              cButton
+              color="dark"
+              class="my-2"
+            >
+              حذف
+            </button>
+          </div>
+        </ng-container>
+        <br />
+      </ng-container>
+      <label for="permitTimeTypeOne" class="pb-2">زمان مجاز :</label>
+      <input
+        type="time"
+        id="permitTimeTypeOne"
+        formControlName="permitTimeTypeOne"
+        aria-label="default input example"
+        cFormControl
+      />
+      <br />
+      <button
+        type="submit"
+        cButton
+        color="dark"
+        [disabled]="workShiftTypeOneForm.invalid"
+      >
+        ایجاد
+      </button>
+    </form>
+  </c-tab-pane>
+
+  <c-tab-pane class="p-3">
+    <h3 class="pb-3">ایجاد شیفت</h3>
+    <form [formGroup]="workShiftTypeTwoForm" (ngSubmit)="postTypeTwo()">
+      <label for="nameTypeTwo" class="pb-2">نام شیفت :</label>
+      <input
+        type="text"
+        id="nameTypeTwo"
+        formControlName="nameTypeTwo"
+        aria-label="default input example"
+        cFormControl
+      />
+      <label for="startTypeTwo" class="pb-2">ساعت شروع :</label>
+      <input
+        type="time"
+        id="startTypeTwo"
+        formControlName="startTypeTwo"
+        aria-label="default input example"
+        cFormControl
+      />
+      <label for="endTypeTwo" class="pb-2">ساعت پایان :</label>
+      <input
+        type="time"
+        id="endTypeTwo"
+        formControlName="endTypeTwo"
+        aria-label="default input example"
+        cFormControl
+      />
+      <label for="flexTimeTypeTwo" class="pb-2">زمان شناور :</label>
+      <input
+        type="time"
+        id="flexTimeTypeTwo"
+        formControlName="flexTimeTypeTwo"
+        aria-label="default input example"
+        cFormControl
+      />
+      <label for="dateTypeTwo" class="pb-2">تاریخ :</label>
+      <ng-persian-datepicker>
+        <input
+          type="text"
+          id="dateTypeTwo"
+          formControlName="dateTypeTwo"
+          aria-label="default input example"
+          cFormControl
+        />
+      </ng-persian-datepicker>
+      <label for="permitTimeTypeTwo" class="pb-2">زمان مجاز :</label>
+      <input
+        type="time"
+        id="permitTimeTypeTwo"
+        formControlName="permitTimeTypeTwo"
+        aria-label="default input example"
+        cFormControl
+      />
+      <br />
+      <button
+        type="submit"
+        cButton
+        color="dark"
+        [disabled]="workShiftTypeTwoForm.invalid"
+      >ایجاد</button>
+    </form>
+  </c-tab-pane>
+</c-tab-content>

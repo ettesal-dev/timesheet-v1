@@ -1,0 +1,44 @@
+<h3 class="pb-3">لیست شیفت‌ها</h3>
+<table cTable>
+    <thead cTableColor="dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">نام</th>
+        <th scope="col">نوع شیفت</th>
+        <th scope="col">روز‌ها</th>
+        <th scope="col">تاریخ</th>
+        <th scope="col">زمان شروع</th>
+        <th scope="col">زمان پایان</th>
+        <th scope="col">تغییر</th>
+        <th scope="col">حذف</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let workShift of workShifts; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>
+          {{ workShift.name }}
+        </td>
+        <td>نوع :{{workShift.type}}</td>
+        <td>
+            <ng-container *ngIf="workShift.days">
+              <ng-container *ngFor="let day of workShift.days">
+                <p>{{ dayConverter(day) }}</p>
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="!workShift.days">تعریف نشده</ng-container>
+          </td>
+        <td>{{ workShift.date ? (workShift.date | date : "dd/MM/yyyy") : "تعریف نشده" }}</td>
+        <td>{{workShift.start_time}}</td>
+        <td>{{workShift.end_time}}</td>
+        <td>
+          <button (click)="visible.toggleLiveDemo(workShift.id, workShift.type)" cButton color="dark">تغییر</button>
+        </td>
+        <td>
+          <button (click)="deleteWorkShift(workShift.id)" cButton color="dark">
+            حذف
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

@@ -21,6 +21,7 @@ export class UpdateHolidayComponent {
   constructor(public visible: FetchHolidayService){}
 
   //PUT
+  //we can get holiday id from visible service
   putHoliday(){
     this.holidayUpdateForm.reset()
   }

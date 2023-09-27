@@ -13,7 +13,9 @@ import { HolidayModule } from '../holiday/holiday.module';
 import { UserShiftModule } from '../user-shift/user-shift.module';
 import { LogModule } from '../log/log.module';
 import { UserModule } from '../user/user.module';
+import { WorkShiftModule } from '../work-shift/work-shift.module';
 
+//navbar components
 import { SubmitComponent } from './submit/submit.component';
 import { ReportComponent } from './report/report.component';
 import { SettingComponent } from './setting/setting.component';
@@ -69,6 +71,7 @@ import { NgPersianDatepickerModule } from 'ng-persian-datepicker';
     UserShiftModule,
     LogModule,
     UserModule,
+    WorkShiftModule,
     NgPersianDatepickerModule,
     NavModule,
     TabsModule,

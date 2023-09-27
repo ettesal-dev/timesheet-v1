@@ -1,1 +1,73 @@
-<p>list-log works!</p>
+<h3 class="pb-3">لیست شیفت کاربران</h3>
+<label for="start" class="pb-2">تاریخ شروع :</label>
+<ng-persian-datepicker>
+  <input
+    cFormControl
+    [formControl]="startDate"
+    type="text"
+    aria-label="default input example"
+    id="start"
+  />
+</ng-persian-datepicker>
+<label for="end" class="pb-2">تاریخ پایان :</label>
+<ng-persian-datepicker>
+  <input
+    cFormControl
+    [formControl]="endDate"
+    type="text"
+    aria-label="default input example"
+    id="end"
+  />
+</ng-persian-datepicker>
+<label for="date" class="pb-2">انتخاب روز :</label>
+<ng-persian-datepicker>
+  <input
+    cFormControl
+    [formControl]="specificDate"
+    type="text"
+    aria-label="default input example"
+    id="date"
+  />
+</ng-persian-datepicker>
+<label for="user" class="pb-2">انتخاب کاربر :</label>
+<select
+    [formControl]="specificUser"
+    aria-label="Default select example"
+    cSelect
+    id="user"
+  >
+    <option *ngFor="let user of users" [value]="user.user_id">
+      {{ user.user_name }}
+    </option>
+  </select>
+<br />
+<button  cButton color="dark" (click)="filter()" class="mb-2">اعمال</button>
+<br />
+
+<table cTable>
+    <thead cTableColor="dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">تاریخ</th>
+        <th scope="col">زمان</th>
+        <th scope="col">یادداشت</th>
+        <th scope="col">نوع شیفت</th>
+        <th scope="col">وضعیت تایید</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let log of logs; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>
+          {{ log.date | date : "dd/MM/yyyy"}}
+        </td>
+        <td>{{log.time}}</td>
+        <td>{{log.comment}}</td>
+        <td>نوع: {{ log.type }}</td>
+        <td>{{ log.is_overtime ? "قبول" : "غیر قابل قبول" }}</td>
+        
+        
+      </tr>
+    </tbody>
+  </table>
+

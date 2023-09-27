@@ -1,0 +1,163 @@
+<c-modal
+  id="liveDemoModal"
+  [visible]="visible.visible"
+  (visibleChange)="visible.handleLiveDemoChange($event)"
+>
+  <c-modal-header>
+    <h5 cModalTitle>بروزرسانی شیفت</h5>
+    <button (click)="visible.toggleLiveDemo()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    <!-- type 1 -->
+    <ng-container *ngIf="visible.workShiftType == '1'">
+      <form [formGroup]="updateWorkShiftTypeOneForm" (ngSubmit)="patchTypeOne()">
+        <label for="startTypeOne" class="pb-2">ساعت شروع :</label>
+        <input
+          type="time"
+          id="startTypeOne"
+          formControlName="startTypeOne"
+          aria-label="default input example"
+          cFormControl
+        />
+        <label for="endTypeOne" class="pb-2">ساعت پایان :</label>
+        <input
+          type="time"
+          id="endTypeOne"
+          formControlName="endTypeOne"
+          aria-label="default input example"
+          cFormControl
+        />
+        <label for="flexTimeTypeOne" class="pb-2">زمان شناور :</label>
+        <input
+          type="time"
+          id="flexTimeTypeOne"
+          formControlName="flexTimeTypeOne"
+          aria-label="default input example"
+          cFormControl
+        />
+        <ng-container formArrayName="days">
+          <label for="name" class="pb-2">روز‌ها :</label>
+          <button
+            type="button"
+            cButton
+            color="dark"
+            (click)="addDays()"
+            class="my-2"
+          >
+            اضافه
+          </button>
+          <ng-container *ngFor="let days of days.controls; let index = index">
+            <div [formGroupName]="index">
+              <label for="name" class="pb-2">انتخاب روز :</label>
+              <select
+                formControlName="attendeesName"
+                id="name"
+                aria-label="Default select example"
+                cSelect
+              >
+                <option *ngFor="let number of numbers" [value]="number.value">
+                  {{ number.name }}
+                </option>
+              </select>
+              <button
+                (click)="deleteDays(index)"
+                cButton
+                color="dark"
+                class="my-2"
+              >
+                حذف
+              </button>
+            </div>
+          </ng-container>
+          <br />
+        </ng-container>
+        <label for="permitTimeTypeOne" class="pb-2">زمان مجاز :</label>
+        <input
+          type="time"
+          id="permitTimeTypeOne"
+          formControlName="permitTimeTypeOne"
+          aria-label="default input example"
+          cFormControl
+        />
+        <br />
+        <c-modal-footer>
+          <button cButton color="secondary" (click)="visible.toggleLiveDemo()">
+            بستن
+          </button>
+          <button
+            type="submit"
+            cButton
+            color="dark"
+            [disabled]="updateWorkShiftTypeOneForm.invalid"
+            (click)="patchTypeOne()"
+          >
+            اعمال
+          </button>
+        </c-modal-footer>
+      </form>
+    </ng-container>
+    <!-- type 2 -->
+    <ng-container *ngIf="visible.workShiftType == '2'">
+        <h3 class="pb-3">ایجاد شیفت</h3>
+    <form [formGroup]="updateworkShiftTypeTwoForm" (ngSubmit)="patchTypeTwo()">
+      <label for="startTypeTwo" class="pb-2">ساعت شروع :</label>
+      <input
+        type="time"
+        id="startTypeTwo"
+        formControlName="startTypeTwo"
+        aria-label="default input example"
+        cFormControl
+      />
+      <label for="endTypeTwo" class="pb-2">ساعت پایان :</label>
+      <input
+        type="time"
+        id="endTypeTwo"
+        formControlName="endTypeTwo"
+        aria-label="default input example"
+        cFormControl
+      />
+      <label for="flexTimeTypeTwo" class="pb-2">زمان شناور :</label>
+      <input
+        type="time"
+        id="flexTimeTypeTwo"
+        formControlName="flexTimeTypeTwo"
+        aria-label="default input example"
+        cFormControl
+      />
+      <label for="dateTypeTwo" class="pb-2">تاریخ :</label>
+      <ng-persian-datepicker>
+        <input
+          type="text"
+          id="dateTypeTwo"
+          formControlName="dateTypeTwo"
+          aria-label="default input example"
+          cFormControl
+        />
+      </ng-persian-datepicker>
+      <label for="permitTimeTypeTwo" class="pb-2">زمان مجاز :</label>
+      <input
+        type="time"
+        id="permitTimeTypeTwo"
+        formControlName="permitTimeTypeTwo"
+        aria-label="default input example"
+        cFormControl
+      />
+      <br />
+      <c-modal-footer>
+        <button cButton color="secondary" (click)="visible.toggleLiveDemo()">
+          بستن
+        </button>
+        <button
+          type="submit"
+          cButton
+          color="dark"
+          [disabled]="updateworkShiftTypeTwoForm.invalid"
+          (click)="patchTypeTwo()"
+        >
+          اعمال
+        </button>
+      </c-modal-footer>
+    </form>
+    </ng-container>
+  </c-modal-body>
+</c-modal>
