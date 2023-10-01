@@ -107,12 +107,12 @@ function initializeKeycloak(keycloak: KeycloakService) {
     JwtModule.forRoot({})  
   ],
   providers: [
-    // {
-    //   provide: APP_INITIALIZER,
-    //   useFactory: initializeKeycloak,
-    //   multi: true,
-    //   deps: [KeycloakService],
-    // },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService],
+    },
     IconSetService,
     Title,
   ],

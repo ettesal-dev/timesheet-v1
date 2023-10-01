@@ -39,6 +39,13 @@ export class FetchUserService implements OnInit{
 
       const decodedToken = this.jwtHelper.decodeToken(token);
       const userId = decodedToken.sub; // 'sub' typically contains the user's ID
+      const userRoles = decodedToken.roles;
+
+      if (userRoles && Array.isArray(userRoles)) {
+        console.log('User Roles:', userRoles);
+      } else {
+        console.error('Roles not found in the token.');
+      }
 
       console.log('User ID:', userId);
       console.log('Token:', token);

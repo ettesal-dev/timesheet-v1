@@ -10,6 +10,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit{
+  userRoles: any[] = [];
   isAuthenticated: boolean = false;
   userProfile: KeycloakProfile | null = null; // Initialize userProfile as null
 
@@ -28,7 +29,48 @@ export class DashboardComponent implements OnInit{
         console.error('Error loading user profile:', error);
       }
     }
+    //get role without getUserRoles()
+    // if (this.isAuthenticated) {
+    //   const keycloakInstance = this.keycloakService.getKeycloakInstance();
+    //   if (keycloakInstance && keycloakInstance.realmAccess && keycloakInstance.realmAccess.roles) {
+    //     const realmRoles = keycloakInstance.realmAccess.roles;
+
+    //     // Access roles for specific resources
+    //     const resourceAccess = keycloakInstance.resourceAccess;
+    //     const resourceRoles = resourceAccess ? Object.values(resourceAccess) : [];
+
+    //     // Combine roles from both realm and resource access
+    //     const allRoles = [...realmRoles, ...resourceRoles];
+
+    //     // Filter out duplicates
+    //     this.userRoles = [...new Set(allRoles)];
+
+    //     console.log('User Roles:', this.userRoles);
+    //   } else {
+    //     console.error('User roles not available.');
+    //   }
+    // } else {
+    //   console.error('User not authenticated.');
+    // }
+
+    //roles
+    if (this.isAuthenticated) {
+      // Check if the user has a specific role
+      const isAdmin = this.keycloakService.isUserInRole('role1');
+      console.log('Is user:', isAdmin);
+
+      // Get user roles (realm roles by default)
+      const userRoles = this.keycloakService.getUserRoles();
+      console.log('User Roles:', userRoles);
+
+      // Get all roles, including client roles
+      const allUserRoles = this.keycloakService.getUserRoles(true);
+      console.log('All User Roles:', allUserRoles);
+    } else {
+      console.error('User not authenticated.');
+    }
   }
+  
 
   async displayTokenAndUsername() {
     try {
@@ -39,9 +81,9 @@ export class DashboardComponent implements OnInit{
       const userId = decodedToken.sub; // 'sub' typically contains the user's ID
 
       console.log('User ID:', userId);
-
       console.log('Token:', token);
       console.log('Username:', username);
+
     } catch (error) {
       console.error('Error fetching token or username:', error);
     }
